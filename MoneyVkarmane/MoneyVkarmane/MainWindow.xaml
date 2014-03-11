@@ -1,0 +1,36 @@
+﻿<Window x:Class="MoneyVkarmane.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="550" Width="900">
+    <Grid x:Name="mainGrid" Margin="8,10,-8,-3">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="130*"/>
+            <RowDefinition Height="130*"/>
+            <RowDefinition Height="60*"/>
+            <RowDefinition Height="60*"/>
+            <RowDefinition Height="60*"/>
+            <RowDefinition Height="60*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="163*"/>
+            <ColumnDefinition Width="382*"/>
+            <ColumnDefinition Width="190*"/>
+        </Grid.ColumnDefinitions>
+        <Label x:Name="nameLabel" Content="MoneyVkarmane" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="1" RenderTransformOrigin="0.414,1.959" 
+HorizontalContentAlignment ="Center" FontSize ="56 "> </Label>
+        <Label x:Name="russianNameLabel" Content="Удобный бюджет-менеджер" Grid.Column="1" HorizontalAlignment="Stretch" Grid.Row="1" VerticalAlignment="Stretch" 
+            HorizontalContentAlignment ="Center" FontSize ="23 "/>
+        <Label x:Name="enterLabel" Content="Вход" HorizontalAlignment="Stretch" Grid.Row="2" VerticalAlignment="Stretch"
+            HorizontalContentAlignment ="Right" FontSize ="23 " FontWeight ="Bold"/>
+        <Label x:Name="loginLabel" Content="Логин:" HorizontalAlignment="Stretch" Grid.Row="3" VerticalAlignment="Stretch"
+            HorizontalContentAlignment ="Right" FontSize ="23 "/>
+        <Label x:Name="passwordLabel" Content="Пароль:" HorizontalAlignment="Stretch" Grid.Row="4" VerticalAlignment="Stretch"
+HorizontalContentAlignment ="Right" FontSize ="23 "/>
+        <TextBox x:Name="loginBox" Grid.Column="1" HorizontalAlignment="Stretch" Grid.Row="3" Text=" " VerticalAlignment="Stretch"
+            HorizontalContentAlignment ="Stretch" FontSize ="23 "/>
+        <TextBox x:Name="passwordBox" Grid.Column="1" HorizontalAlignment="Stretch" Grid.Row="4" TextWrapping="Wrap" Text="" VerticalAlignment="Stretch"
+            VerticalContentAlignment ="Stretch" FontSize ="23 "/>
+        <Button x:Name="registrationButton" Content="Регистрация" Grid.Column="2" HorizontalAlignment="Stretch" Grid.Row="2" VerticalAlignment="Stretch"
+            FontSize ="23" FontWeight ="Bold" Background="White" BorderThickness="0"/>
+    </Grid>
+</Window>
