@@ -23,6 +23,19 @@ namespace MoneyVkarmane
         public MainWindow()
         {
             InitializeComponent();
+            //mainGrid.Visibility = System.Windows.Visibility.Hidden;
+        }
+
+        private void registrationButton_Click(object sender, RoutedEventArgs e)
+        {
+            startGrid.Visibility = System.Windows.Visibility.Hidden;
+            registrationGrid.Visibility = System.Windows.Visibility.Visible;
+        }
+
+        private void backButton_Click(object sender, RoutedEventArgs e)
+        {
+            registrationGrid.Visibility = System.Windows.Visibility.Hidden;
+            startGrid.Visibility = System.Windows.Visibility.Visible;
         }
     }
 }
