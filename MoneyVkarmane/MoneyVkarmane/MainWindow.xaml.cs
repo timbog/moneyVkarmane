@@ -37,5 +37,17 @@ namespace MoneyVkarmane
             registrationGrid.Visibility = System.Windows.Visibility.Hidden;
             startGrid.Visibility = System.Windows.Visibility.Visible;
         }
+
+        private void addMembersButton_Click(object sender, RoutedEventArgs e)
+        {
+            registrationGrid.Visibility = System.Windows.Visibility.Hidden;
+            nameGrid.Visibility = System.Windows.Visibility.Visible;
+        }
+
+        private void okNameButton_Click(object sender, RoutedEventArgs e)
+        {
+            nameGrid.Visibility = System.Windows.Visibility.Hidden;
+            registrationGrid.Visibility = System.Windows.Visibility.Visible;
+        }
     }
 }

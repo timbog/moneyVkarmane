@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Name="startWindow" x:Class="MoneyVkarmane.MainWindow"
         Title="MoneyVkarmane" Height="550" Width="900">
     <Grid x:Name="mainGrid" Margin="0,0,-8,-5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-        <Grid x:Name="startGrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,5,0" Visibility="Visible">
+        <Grid x:Name="startGrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,1,5,0" Visibility="Visible" >
             <Grid.RowDefinitions>
                 <RowDefinition Height="130*"/>
                 <RowDefinition Height="130*"/>
@@ -65,11 +65,43 @@
                      FontSize ="30"/>
             <PasswordBox x:Name="newPasswordBox" Grid.Column="1" HorizontalAlignment="Stretch" Grid.Row="3" VerticalAlignment="Stretch" FontSize ="30"/>
             <Button x:Name="addMembersButton" Content="Члены семьи:" HorizontalAlignment="Stretch" Grid.Row="5" VerticalAlignment="Stretch"
-                    Background="PowderBlue" BorderThickness="0" FontSize ="20" FontWeight ="Bold"/>
+                    Background="PowderBlue" BorderThickness="0" FontSize ="20" FontWeight ="Bold" Click="addMembersButton_Click"/>
             <Button x:Name="createButton" Content="Создать" Grid.Column="2" HorizontalAlignment="Stretch" Grid.Row="6" VerticalAlignment="Stretch"
                     Background="PowderBlue" BorderThickness="0" FontSize ="20" FontWeight ="Bold"/>
             <Button x:Name="backButton" Content="Назад" HorizontalAlignment="Stretch" Grid.Row="6" VerticalAlignment="Stretch"
                     Background="Bisque"  BorderThickness="0" FontSize ="20" Click="backButton_Click" FontWeight ="Bold"/>
+        </Grid>
+        <Grid x:Name="nameGrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Visibility="Hidden">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="217*"/>
+                <ColumnDefinition Width="306*"/>
+                <ColumnDefinition Width="246*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="70*"/>
+                <RowDefinition Height="70*"/>
+                <RowDefinition Height="70*"/>
+                <RowDefinition Height="70*"/>
+                <RowDefinition Height="70*"/>
+                <RowDefinition Height="70*"/>
+                <RowDefinition Height="70*"/>
+                <RowDefinition Height="70*"/>
+                <RowDefinition Height="70*"/>
+            </Grid.RowDefinitions>
+            <Label x:Name="addNameLabel" Content="Укажите членов семьи:" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontSize ="20" Grid.Row="0" Grid.Column="0"
+                   FontWeight ="Bold"/>
+            <TextBox x:Name="nameBox1" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Stretch" Text=" " VerticalAlignment="Stretch" BorderThickness="2" FontSize ="20"/>
+            <TextBox x:Name="nameBox2" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Stretch" Text=" " VerticalAlignment="Stretch" BorderThickness="2" FontSize ="20"/>
+            <TextBox x:Name="nameBox3" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Stretch" Text=" " VerticalAlignment="Stretch" BorderThickness="2" FontSize ="20"/>
+            <TextBox x:Name="nameBox4" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Stretch" Text=" " VerticalAlignment="Stretch" BorderThickness="2" FontSize ="20"/>
+            <TextBox x:Name="nameBox5" Grid.Column="1" Grid.Row="4" HorizontalAlignment="Stretch" Text=" " VerticalAlignment="Stretch" BorderThickness="2" FontSize ="20"/>
+            <TextBox x:Name="nameBox6" Grid.Column="1" Grid.Row="5" HorizontalAlignment="Stretch" Text=" " VerticalAlignment="Stretch" BorderThickness="2" FontSize ="20"/>
+            <TextBox x:Name="nameBox7" Grid.Column="1" Grid.Row="6" HorizontalAlignment="Stretch" Text=" " VerticalAlignment="Stretch" BorderThickness="2" FontSize ="20"/>
+            <TextBox x:Name="nameBox8" Grid.Column="1" Grid.Row="7" HorizontalAlignment="Stretch" Text=" " VerticalAlignment="Stretch" BorderThickness="2" FontSize ="20"/>
+            <TextBox x:Name="nameBox9" Grid.Column="1" Grid.Row="8" HorizontalAlignment="Stretch" Text=" " VerticalAlignment="Stretch" BorderThickness="2" FontSize ="20"/>
+            <Button x:Name="okNameButton" Content="ОК" Grid.Column="2" Grid.Row="8" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch" Background="PowderBlue"
+                    BorderThickness="0" FontSize ="20" FontWeight ="Bold" Click="okNameButton_Click"/>
+
         </Grid>
 
     </Grid>
