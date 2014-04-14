@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
+using ClientLibrary;
 namespace MoneyVkarmane
 {
     /// <summary>
@@ -23,6 +23,8 @@ namespace MoneyVkarmane
         public MainWindow()
         {
             InitializeComponent();
+            ClientLibrary.MoneyVKarmaneClient newClient = new MoneyVKarmaneClient();
+            newClient.AddClient("oleg", "5643", "Vasya, Oleg");
             //mainGrid.Visibility = System.Windows.Visibility.Hidden;
         }
 

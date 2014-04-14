@@ -7,11 +7,12 @@ using System.ServiceModel;
 using System.ServiceModel.Description;
 using System.ServiceModel.Web;
 using System.Web;
-namespace ClientWCFNET
+
+namespace ClientLibrary
 {
-    class Client
+    public class Client
     {
-        public IService service {get; private set;}
+        public IService service { get; private set; }
 
         ChannelFactory<IService> cf;
 
@@ -21,6 +22,5 @@ namespace ClientWCFNET
             cf.Endpoint.Behaviors.Add(new WebHttpBehavior());
             service = cf.CreateChannel();
         }
-
     }
 }
