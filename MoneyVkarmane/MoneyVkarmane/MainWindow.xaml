@@ -67,7 +67,7 @@
             <Button x:Name="addMembersButton" Content="Члены семьи:" HorizontalAlignment="Stretch" Grid.Row="5" VerticalAlignment="Stretch"
                     Background="PowderBlue" BorderThickness="0" FontSize ="20" FontWeight ="Bold" Click="addMembersButton_Click"/>
             <Button x:Name="createButton" Content="Создать" Grid.Column="2" HorizontalAlignment="Stretch" Grid.Row="6" VerticalAlignment="Stretch"
-                    Background="PowderBlue" BorderThickness="0" FontSize ="20" FontWeight ="Bold"/>
+                    Background="PowderBlue" BorderThickness="0" FontSize ="20" FontWeight ="Bold" Click="createButton_Click"/>
             <Button x:Name="backButton" Content="Назад" HorizontalAlignment="Stretch" Grid.Row="6" VerticalAlignment="Stretch"
                     Background="Bisque"  BorderThickness="0" FontSize ="20" Click="backButton_Click" FontWeight ="Bold"/>
         </Grid>

@@ -25,7 +25,7 @@ namespace ClientLibrary
             client.service.AddNewSum(login, newName, sum, aim, newComment, date, monType);
         }
 
-        public List<string> GetAllSums(string login)
+        public List<SumChange> GetAllSums(string login)
         {
             return client.service.GetSums(login);
         }

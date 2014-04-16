@@ -22,7 +22,8 @@ namespace ClientLibrary
         void AddNewSum(string login, string newName, double sum, string aim, string comment, DateTime date, string monType);
 
         [OperationContract]
-        [WebInvoke]
-        List<string> GetSums(string login);
+        [XmlSerializerFormat]
+        [WebGet(RequestFormat = WebMessageFormat.Xml, ResponseFormat = WebMessageFormat.Xml)]
+        List<SumChange> GetSums(string login);
     }
 }

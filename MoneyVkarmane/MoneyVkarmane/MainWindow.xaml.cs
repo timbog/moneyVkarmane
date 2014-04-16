@@ -20,11 +20,12 @@ namespace MoneyVkarmane
     /// </summary>
     public partial class MainWindow : Window
     {
+        private MoneyVKarmaneClient client;
+
         public MainWindow()
         {
+            client = new MoneyVKarmaneClient();
             InitializeComponent();
-            ClientLibrary.MoneyVKarmaneClient newClient = new MoneyVKarmaneClient();
-            newClient.AddClient("oleg", "5643", "Vasya, Oleg");
             //mainGrid.Visibility = System.Windows.Visibility.Hidden;
         }
 
@@ -50,6 +51,12 @@ namespace MoneyVkarmane
         {
             nameGrid.Visibility = System.Windows.Visibility.Hidden;
             registrationGrid.Visibility = System.Windows.Visibility.Visible;
+        }
+
+        private void createButton_Click(object sender, RoutedEventArgs e)
+        {
+            string nameStr = nameBox1.Text + "," + nameBox2.Text + "," + nameBox3.Text + "," + nameBox4.Text + "," + nameBox5.Text + "," + nameBox6.Text + "," + nameBox7.Text + "," + nameBox8.Text + "," + nameBox9.Text;
+                client.AddClient(newLoginBox.Text, newPasswordBox.Password, nameStr);
         }
     }
 }
