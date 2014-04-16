@@ -12,6 +12,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.ServiceModel;
+using System.ServiceModel.Description;
+using System.ServiceModel.Web;
+using System.Web;
 using ClientLibrary;
 namespace MoneyVkarmane
 {
@@ -56,7 +60,21 @@ namespace MoneyVkarmane
         private void createButton_Click(object sender, RoutedEventArgs e)
         {
             string nameStr = nameBox1.Text + "," + nameBox2.Text + "," + nameBox3.Text + "," + nameBox4.Text + "," + nameBox5.Text + "," + nameBox6.Text + "," + nameBox7.Text + "," + nameBox8.Text + "," + nameBox9.Text;
-                client.AddClient(newLoginBox.Text, newPasswordBox.Password, nameStr);
+            try
+            {
+                bool flag = client.AddClient(newLoginBox.Text, newPasswordBox.Password, nameStr);
+                if (flag)
+                {
+                    registrationGrid.Visibility = System.Windows.Visibility.Hidden;
+                    budgetTableGrid.Visibility = System.Windows.Visibility.Visible;
+                    this.Height = 700;
+                    this.Width = 1100;
+                }
+            }
+            catch (System.ServiceModel.EndpointNotFoundException)
+            {
+                errorLabel.Content = "No connection to server";
+            }
         }
     }
 }

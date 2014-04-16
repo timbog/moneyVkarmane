@@ -1,0 +1,15 @@
+C:\Users\Bogdan\Documents\GitHub\moneyVkarmane\MoneyVkarmane\MoneyVkarmane\bin\Debug\MoneyVkarmane.exe.config
+C:\Users\Bogdan\Documents\GitHub\moneyVkarmane\MoneyVkarmane\MoneyVkarmane\bin\Debug\MoneyVkarmane.exe
+C:\Users\Bogdan\Documents\GitHub\moneyVkarmane\MoneyVkarmane\MoneyVkarmane\bin\Debug\MoneyVkarmane.pdb
+C:\Users\Bogdan\Documents\GitHub\moneyVkarmane\MoneyVkarmane\MoneyVkarmane\bin\Debug\ClientLibrary.dll
+C:\Users\Bogdan\Documents\GitHub\moneyVkarmane\MoneyVkarmane\MoneyVkarmane\bin\Debug\ClientLibrary.pdb
+C:\Users\Bogdan\Documents\GitHub\moneyVkarmane\MoneyVkarmane\MoneyVkarmane\obj\Debug\MoneyVkarmane.csprojResolveAssemblyReference.cache
+C:\Users\Bogdan\Documents\GitHub\moneyVkarmane\MoneyVkarmane\MoneyVkarmane\obj\Debug\MainWindow.baml
+C:\Users\Bogdan\Documents\GitHub\moneyVkarmane\MoneyVkarmane\MoneyVkarmane\obj\Debug\MainWindow.g.cs
+C:\Users\Bogdan\Documents\GitHub\moneyVkarmane\MoneyVkarmane\MoneyVkarmane\obj\Debug\App.g.cs
+C:\Users\Bogdan\Documents\GitHub\moneyVkarmane\MoneyVkarmane\MoneyVkarmane\obj\Debug\MoneyVkarmane_MarkupCompile.cache
+C:\Users\Bogdan\Documents\GitHub\moneyVkarmane\MoneyVkarmane\MoneyVkarmane\obj\Debug\MoneyVkarmane.g.resources
+C:\Users\Bogdan\Documents\GitHub\moneyVkarmane\MoneyVkarmane\MoneyVkarmane\obj\Debug\MoneyVkarmane.Properties.Resources.resources
+C:\Users\Bogdan\Documents\GitHub\moneyVkarmane\MoneyVkarmane\MoneyVkarmane\obj\Debug\MoneyVkarmane.csproj.GenerateResource.Cache
+C:\Users\Bogdan\Documents\GitHub\moneyVkarmane\MoneyVkarmane\MoneyVkarmane\obj\Debug\MoneyVkarmane.exe
+C:\Users\Bogdan\Documents\GitHub\moneyVkarmane\MoneyVkarmane\MoneyVkarmane\obj\Debug\MoneyVkarmane.pdb

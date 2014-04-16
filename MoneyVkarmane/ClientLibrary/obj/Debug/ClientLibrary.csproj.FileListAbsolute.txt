@@ -1,0 +1,5 @@
+C:\Users\Bogdan\Documents\GitHub\moneyVkarmane\MoneyVkarmane\ClientLibrary\bin\Debug\ClientLibrary.dll
+C:\Users\Bogdan\Documents\GitHub\moneyVkarmane\MoneyVkarmane\ClientLibrary\bin\Debug\ClientLibrary.pdb
+C:\Users\Bogdan\Documents\GitHub\moneyVkarmane\MoneyVkarmane\ClientLibrary\obj\Debug\ClientLibrary.csprojResolveAssemblyReference.cache
+C:\Users\Bogdan\Documents\GitHub\moneyVkarmane\MoneyVkarmane\ClientLibrary\obj\Debug\ClientLibrary.dll
+C:\Users\Bogdan\Documents\GitHub\moneyVkarmane\MoneyVkarmane\ClientLibrary\obj\Debug\ClientLibrary.pdb
