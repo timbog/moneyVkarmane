@@ -33,9 +33,9 @@
             <PasswordBox x:Name="passwordBox" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
         		FontSize ="23" HorizontalContentAlignment ="Stretch" Margin="0,0,0,61" Grid.Column="1" Grid.Row="4" Grid.RowSpan="2"/>
             <Button x:Name="registrationButton" Content="Регистрация" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-        		FontSize ="23" FontWeight ="Bold" Background="PowderBlue" BorderThickness="0" Grid.Column="2" Grid.Row="2" Click="registrationButton_Click"/>
+        		FontSize ="23" FontWeight ="Bold" Background="PowderBlue" BorderThickness="1" Grid.Column="2" Grid.Row="2" Click="registrationButton_Click"/>
             <Button x:Name="enterButton" Content="Войти" HorizontalAlignment="Right" VerticalAlignment="Stretch"
-        		FontSize ="23" FontWeight ="Bold" Background="PowderBlue" BorderThickness="0" HorizontalContentAlignment ="Center" Grid.Column="1" Grid.Row="5" Width="483"/>
+        		FontSize ="23" FontWeight ="Bold" Background="PowderBlue" BorderThickness="1" HorizontalContentAlignment ="Center" Grid.Column="1" Grid.Row="5" Width="483"/>
         </Grid>
         <Grid x:Name="registrationGrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Visibility="Hidden" Margin="0,1,5,1">
             <Grid.RowDefinitions>
@@ -65,11 +65,11 @@
                      FontSize ="30"/>
             <PasswordBox x:Name="newPasswordBox" Grid.Column="1" HorizontalAlignment="Stretch" Grid.Row="3" VerticalAlignment="Stretch" FontSize ="30"/>
             <Button x:Name="addMembersButton" Content="Члены семьи:" HorizontalAlignment="Stretch" Grid.Row="5" VerticalAlignment="Stretch"
-                    Background="PowderBlue" BorderThickness="0" FontSize ="20" FontWeight ="Bold" Click="addMembersButton_Click"/>
+                    Background="PowderBlue" BorderThickness="1" FontSize ="20" FontWeight ="Bold" Click="addMembersButton_Click"/>
             <Button x:Name="createButton" Content="Создать" Grid.Column="2" HorizontalAlignment="Stretch" Grid.Row="6" VerticalAlignment="Stretch"
-                    Background="PowderBlue" BorderThickness="0" FontSize ="20" FontWeight ="Bold" Click="createButton_Click"/>
+                    Background="PowderBlue" BorderThickness="1" FontSize ="20" FontWeight ="Bold" Click="createButton_Click"/>
             <Button x:Name="backButton" Content="Назад" HorizontalAlignment="Stretch" Grid.Row="6" VerticalAlignment="Stretch"
-                    Background="Bisque"  BorderThickness="0" FontSize ="20" Click="backButton_Click" FontWeight ="Bold"/>
+                    Background="Bisque"  BorderThickness="1" FontSize ="20" Click="backButton_Click" FontWeight ="Bold"/>
             <Label x:Name="errorLabel" Content="" Grid.Column="1" HorizontalAlignment="Stretch"  Grid.Row="4" VerticalAlignment="Stretch" FontSize ="30"/>
         </Grid>
         <Grid x:Name="nameGrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Visibility="Hidden">
@@ -101,10 +101,84 @@
             <TextBox x:Name="nameBox8" Grid.Column="1" Grid.Row="7" HorizontalAlignment="Stretch" Text=" " VerticalAlignment="Stretch" BorderThickness="2" FontSize ="20"/>
             <TextBox x:Name="nameBox9" Grid.Column="1" Grid.Row="8" HorizontalAlignment="Stretch" Text=" " VerticalAlignment="Stretch" BorderThickness="2" FontSize ="20"/>
             <Button x:Name="okNameButton" Content="ОК" Grid.Column="2" Grid.Row="8" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch" Background="PowderBlue"
-                    BorderThickness="0" FontSize ="20" FontWeight ="Bold" Click="okNameButton_Click"/>
+                    BorderThickness="1" FontSize ="20" FontWeight ="Bold" Click="okNameButton_Click"/>
 
         </Grid>
-        <Grid x:Name="budgetTableGrid" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch" Visibility="Hidden"/>
+        <Grid x:Name="budgetTableGrid" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch" Visibility="Hidden">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="38*"/>
+                <RowDefinition Height="211*"/>
+                <RowDefinition Height="13*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="37*"/>
+                <ColumnDefinition Width="22*"/>
+                <ColumnDefinition Width="16*"/>
+                <ColumnDefinition Width="127*"/>
+                <ColumnDefinition Width="23*"/>
+            </Grid.ColumnDefinitions>
+            <DataGrid x:Name="budgetChangesDataGrid" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch" Visibility="Visible" BorderThickness="0"
+                      CanUserResizeColumns="False" ColumnWidth="120*" Grid.Column="2" Grid.RowSpan="3" Grid.ColumnSpan="3"/>
+            <Button x:Name="addNewSumButton" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="0" BorderThickness="1" Content="+" FontSize="45"
+                    VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontWeight ="Bold" Background="PowderBlue" Click="addNewSumButton_Click"/>
+            <Border x:Name="addNewSumBorder" BorderBrush="PowderBlue" BorderThickness="3" Grid.Column="3" Grid.Row="1" Visibility="Hidden">
+                <Grid x:Name="addNewSumGrid" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="2" Background="White">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="60*"/>
+                        <RowDefinition Height="38*"/>
+                        <RowDefinition Height="38*"/>
+                        <RowDefinition Height="38*"/>
+                        <RowDefinition Height="38*"/>
+                        <RowDefinition Height="38*"/>
+                        <RowDefinition Height="38*"/>
+                        <RowDefinition Height="38*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="102*"/>
+                        <ColumnDefinition Width="92*"/>
+                        <ColumnDefinition Width="92*"/>
+                        <ColumnDefinition Width="92*"/>
+                        <ColumnDefinition Width="102*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label x:Name="addNewSumLabel" Content="Добавить новую сумму" HorizontalAlignment="Stretch" 
+                       VerticalAlignment="Stretch" Grid.Column="1" FontSize="23" FontWeight="Bold" Grid.ColumnSpan="3"/>
+                    <Label x:Name="timeLabel" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontSize="20" Content="Время:" Grid.Row="1" ToolTip="Время в формате M/d/YYYY"/>
+                    <CheckBox x:Name="nowCheckBox" Content="Сейчас" Grid.Column="4" HorizontalAlignment="Stretch" Grid.Row="1" VerticalAlignment="Stretch" FontSize="14">
+                        <CheckBox.LayoutTransform>
+                            <ScaleTransform ScaleX="1.4" ScaleY="1.4" />
+                        </CheckBox.LayoutTransform>
+                    </CheckBox>
+                    <Label x:Name="newNameLabel" Content="Имя:" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontSize="20" Grid.Row="2"/>
+                    <Label x:Name="SumLabel" Content="Сумма:" HorizontalAlignment="Stretch" Grid.Row="3" VerticalAlignment="Stretch" FontSize="20"/>
+                    <Label x:Name="moneyTypeLabel" Content="Валюта:" HorizontalAlignment="Stretch" Grid.Row="4" VerticalAlignment="Stretch" FontSize="20"/>
+                    <CheckBox x:Name="rubleCheckBox" Content="Рубль" Grid.Column="1" HorizontalAlignment="Stretch" Grid.Row="4" VerticalAlignment="Stretch"  FontSize="14" Checked="rubleCheckBox_Checked">
+                        <CheckBox.LayoutTransform>
+                            <ScaleTransform ScaleX="1.4" ScaleY="1.4" />
+                        </CheckBox.LayoutTransform>
+                    </CheckBox>
+                    <CheckBox x:Name="euroCheckBox" Content="Euro" Grid.Column="2" HorizontalAlignment="Stretch" Grid.Row="4" VerticalAlignment="Stretch" FontSize="14" Checked="euroCheckBox_Checked">
+                        <CheckBox.LayoutTransform>
+                            <ScaleTransform ScaleX="1.4" ScaleY="1.4" />
+                        </CheckBox.LayoutTransform>
+                    </CheckBox>
+                    <CheckBox x:Name="dollarCheckBox" Content="Dollar" Grid.Column="3" HorizontalAlignment="Stretch" Grid.Row="4" VerticalAlignment="Stretch" FontSize="14" Checked="dollarCheckBox_Checked">
+                        <CheckBox.LayoutTransform>
+                            <ScaleTransform ScaleX="1.4" ScaleY="1.4" />
+                        </CheckBox.LayoutTransform>
+                    </CheckBox>
+                    <Label x:Name="aimOrWhereLabel" Content="Детали:" HorizontalAlignment="Stretch" Grid.Row="5" VerticalAlignment="Stretch"  FontSize="20"/>
+                    <Label x:Name="commentLabel" Content="Коммент.:" HorizontalAlignment="Stretch" Grid.Row="6" VerticalAlignment="Stretch" FontSize="20"/>
+                    <TextBox x:Name="timeBox" Grid.ColumnSpan="3" Grid.Column="1" HorizontalAlignment="Stretch" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Stretch" FontSize="20"/>
+                    <TextBox x:Name="nameBox" Grid.ColumnSpan="3" Grid.Column="1" HorizontalAlignment="Stretch" Grid.Row="2" TextWrapping="Wrap" Text="" VerticalAlignment="Stretch" FontSize="20"/>
+                    <TextBox x:Name="sumBox" Grid.ColumnSpan="3" Grid.Column="1" HorizontalAlignment="Stretch" Grid.Row="3" TextWrapping="Wrap" Text="" VerticalAlignment="Stretch" FontSize="20" LostKeyboardFocus="sumBox_LostKeyboardFocus"/>
+                    <TextBox x:Name="commentBox" Grid.ColumnSpan="3" Grid.Column="1" HorizontalAlignment="Stretch" Grid.Row="6" TextWrapping="Wrap" Text="" VerticalAlignment="Stretch" FontSize="20"/>
+                    <Button x:Name="okAddButton" Content="OK" Grid.Column="4" HorizontalAlignment="Stretch" Grid.Row="7" VerticalAlignment="Stretch" Background="PowderBlue" FontSize="20" BorderThickness="1" Click="okAddButton_Click"/>
+                    <Button x:Name="backNewSumButton" Content="Назад" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontSize="20" Grid.Row="7" Grid.Column="0" Background="Bisque" BorderThickness="1" Click="backNewSumButton_Click"/>
+                    <ComboBox x:Name="aimOrWhereBox" Grid.ColumnSpan="3" Grid.Column="1" HorizontalAlignment="Stretch" Grid.Row="5" VerticalAlignment="Stretch"  FontSize="20"/>
+                    <Label x:Name="addNewSumErrorLabel" Content="" Grid.Column="4" HorizontalAlignment="Stretch" Grid.Row="3" VerticalAlignment="Stretch" FontSize="20"/>
+                </Grid>
+            </Border>
+        </Grid>
 
     </Grid>
 

@@ -19,18 +19,19 @@ namespace ClientLibrary
             this.Money = money;
         }
 
-        public int Id { get; set; }
+        public Nullable<System.DateTime> Time { get; set; }
 
         public string Name { get; set; }
 
-        public string Aim { get; set; }
-
         public Nullable<double> Change { get; set; }
 
-        public Nullable<System.DateTime> Time { get; set; }
+        public string Money { get; set; }
+
+        public string Aim { get; set; }
 
         public string Comment { get; set; }
 
-        public string Money { get; set; }
+        public int Id { get; set; }
+
     }
 }
