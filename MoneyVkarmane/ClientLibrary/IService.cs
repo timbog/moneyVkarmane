@@ -25,5 +25,9 @@ namespace ClientLibrary
         [XmlSerializerFormat]
         [WebGet(RequestFormat = WebMessageFormat.Xml, ResponseFormat = WebMessageFormat.Xml)]
         List<SumChange> GetSums(string login);
+
+        [OperationContract]
+        [WebGet(BodyStyle = WebMessageBodyStyle.Wrapped)]
+        bool CorrectEnter(string login, string password);
     }
 }

@@ -29,5 +29,10 @@ namespace ClientLibrary
         {
             return client.service.GetSums(login);
         }
+
+        public bool SuccesfulLogin(string login, string password)
+        {
+            return client.service.CorrectEnter(login, password);
+        }
     }
 }

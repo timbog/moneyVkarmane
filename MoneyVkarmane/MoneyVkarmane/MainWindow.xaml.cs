@@ -189,5 +189,16 @@ namespace MoneyVkarmane
             rubleCheckBox.IsChecked = false;
         }
 
+        private void enterButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (client.SuccesfulLogin(loginBox.Text, passwordBox.Password))
+            {
+                startGrid.Visibility = System.Windows.Visibility.Hidden;
+                budgetTableGrid.Visibility = System.Windows.Visibility.Visible;
+                temporaryLogin = loginBox.Text;
+                budgetChangesDataGrid.ItemsSource = client.GetAllSums(temporaryLogin);
+            }
+        }
+
     }
 }
