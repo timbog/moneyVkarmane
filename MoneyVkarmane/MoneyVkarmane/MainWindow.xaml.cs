@@ -72,24 +72,18 @@ namespace MoneyVkarmane
                     this.Height = 700;
                     this.Width = 1100;
                     budgetChangesDataGrid.ItemsSource = client.GetAllSums(newLoginBox.Text);
-                    budgetChangesDataGrid.Columns[0].Header = "Дата и время";
-                    budgetChangesDataGrid.Columns[1].Header = "Имя";
-                    budgetChangesDataGrid.Columns[2].Header = "Сумма";
-                    budgetChangesDataGrid.Columns[3].Header = "Валюта";
-                    budgetChangesDataGrid.Columns[4].Header = "На что/Откуда";
-                    budgetChangesDataGrid.Columns[5].Header = "Комментарий";
-                    budgetChangesDataGrid.Columns[6].Header = "ID клиента";
                 }
             }
             catch (System.ServiceModel.EndpointNotFoundException)
             {
-                errorLabel.Content = "Сервер недоступен";
+                registrationGrid.Opacity = 0.1;
+                errorBorder.Visibility = System.Windows.Visibility.Visible;
             }
         }
 
         private void addNewSumButton_Click(object sender, RoutedEventArgs e)
         {
-            budgetChangesDataGrid.Opacity = 0.2;
+            budgetChangesDataGrid.Opacity = 0.1;
             addNewSumBorder.Visibility = System.Windows.Visibility.Visible;
         }
 
@@ -103,7 +97,7 @@ namespace MoneyVkarmane
         {
             try
             {
-                if (double.Parse(sumBox.Text) > 0.0)
+                if (double.Parse(sumBox.Text) < 0.0)
                 {
                     addNewSumErrorLabel.Content = "";
                     aimOrWhereBox.Items.Clear();
@@ -124,7 +118,7 @@ namespace MoneyVkarmane
                     aimOrWhereBox.Items.Add("Арендная плата");
                     aimOrWhereBox.Items.Add("Другое");
                 }
-                if (double.Parse(sumBox.Text) < 0.0)
+                if (double.Parse(sumBox.Text) > 0.0)
                 {
                     addNewSumErrorLabel.Content = "";
                     aimOrWhereBox.Items.Clear();
@@ -146,8 +140,8 @@ namespace MoneyVkarmane
 
         private void okAddButton_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
+            //try
+            //{
                 DateTime data = new DateTime();
                 if (nowCheckBox.IsChecked == true)
                     data = DateTime.Now;
@@ -159,16 +153,17 @@ namespace MoneyVkarmane
                 if (euroCheckBox.IsChecked == true)
                     moneyType = "€";
                 if (dollarCheckBox.IsChecked == true)
-                    moneyType = "$";               
+                    moneyType = "$";
                 client.AddSum(temporaryLogin, nameBox.Text, double.Parse(sumBox.Text), aimOrWhereBox.Text, commentBox.Text, data, moneyType);
-                budgetChangesDataGrid.ItemsSource = client.GetAllSums(temporaryLogin);
+                budgetChangesDataGrid.ItemsSource = null;
+                budgetChangesDataGrid.ItemsSource = client.GetAllSums(this.temporaryLogin);
                 addNewSumBorder.Visibility = System.Windows.Visibility.Hidden;
                 budgetChangesDataGrid.Opacity = 1;
 
-            }
-            catch (Exception)
-            {
-            }
+            //}
+            //catch (Exception)
+            //{
+            //}
         }
 
         private void rubleCheckBox_Checked(object sender, RoutedEventArgs e)
@@ -191,13 +186,80 @@ namespace MoneyVkarmane
 
         private void enterButton_Click(object sender, RoutedEventArgs e)
         {
-            if (client.SuccesfulLogin(loginBox.Text, passwordBox.Password))
+            try
             {
-                startGrid.Visibility = System.Windows.Visibility.Hidden;
-                budgetTableGrid.Visibility = System.Windows.Visibility.Visible;
-                temporaryLogin = loginBox.Text;
-                budgetChangesDataGrid.ItemsSource = client.GetAllSums(temporaryLogin);
+                if (client.SuccesfulLogin(loginBox.Text, passwordBox.Password))
+                {
+                    this.Height = 700;
+                    this.Width = 1100;
+                    startGrid.Visibility = System.Windows.Visibility.Hidden;
+                    budgetTableGrid.Visibility = System.Windows.Visibility.Visible;
+                    temporaryLogin = loginBox.Text;
+                    budgetChangesDataGrid.ItemsSource = client.GetAllSums(this.temporaryLogin);
+                }
+                else
+                {
+                    startGrid.Opacity = 0.1;
+                    errorBorder.Visibility = System.Windows.Visibility.Visible;
+                    errorCommentLabel.Content = "Неверный логин/пароль";
+                }
             }
+            catch (System.ServiceModel.EndpointNotFoundException)
+                {
+                    startGrid.Opacity = 0.1;
+                    errorBorder.Visibility = System.Windows.Visibility.Visible;
+                }
+        }
+
+        private void errorOkButton_Click(object sender, RoutedEventArgs e)
+        {
+            errorBorder.Visibility = System.Windows.Visibility.Hidden;
+            startGrid.Opacity = 1;
+            registrationGrid.Opacity = 1;
+        }
+
+        private void budgetChangesDataGrid_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
+        {
+            //cancel the auto generated column
+            e.Cancel = true;
+
+            //Get the existing column
+            DataGridTextColumn dgTextC = (DataGridTextColumn)e.Column;
+
+            //Create a new template column 
+            DataGridTemplateColumn dgtc = new DataGridTemplateColumn();
+
+            DataTemplate dataTemplate = new DataTemplate(typeof(DataGridCell));
+
+            FrameworkElementFactory tb = new FrameworkElementFactory(typeof(TextBlock));
+            tb.SetValue(TextBlock.TextWrappingProperty, TextWrapping.Wrap);
+            dataTemplate.VisualTree = tb;
+
+            dgtc.Header = dgTextC.Header;
+            dgtc.CellTemplate = dataTemplate;          
+            string headername = dgtc.Header.ToString();
+            tb.SetBinding(TextBlock.TextProperty, dgTextC.Binding);
+            if (headername == "Time")
+                dgtc.Header = "Время";
+            if (headername == "Name")
+                dgtc.Header = "Имя";
+            if (headername == "Change")
+                dgtc.Header = "Сумма";
+            if (headername == "Money")
+                dgtc.Header = "Валюта";
+            if (headername == "Aim")
+                dgtc.Header = "Детали";
+            if (headername == "Comment")
+                dgtc.Header = "Коммент.";
+            //add column back to data grid
+            DataGrid dg = sender as DataGrid;
+            if (dg.Columns.Count() <= 5)
+                dg.Columns.Add(dgtc);
+        }
+
+        private void nowCheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            timeBox.Text = DateTime.Now.ToString();
         }
 
     }

@@ -34,5 +34,10 @@ namespace ClientLibrary
         {
             return client.service.CorrectEnter(login, password);
         }
+
+        public int GetIdentification(string login)
+        {
+            return client.service.GetId(login);
+        }
     }
 }

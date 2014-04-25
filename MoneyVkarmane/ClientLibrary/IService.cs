@@ -29,5 +29,9 @@ namespace ClientLibrary
         [OperationContract]
         [WebGet(BodyStyle = WebMessageBodyStyle.Wrapped)]
         bool CorrectEnter(string login, string password);
+
+        [OperationContract]
+        [WebGet(BodyStyle = WebMessageBodyStyle.Wrapped)]
+        int GetId(string login);
     }
 }
