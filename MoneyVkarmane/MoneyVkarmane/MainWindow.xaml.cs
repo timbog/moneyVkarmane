@@ -28,6 +28,15 @@ namespace MoneyVkarmane
 
         private string temporaryLogin;
 
+        public List<string> temporaryNameList;
+
+        private bool allNameBoxesAreEmty()
+        {
+            return ((nameBox1.Text == "") && (nameBox2.Text == "") && (nameBox3.Text == "") && (nameBox4.Text == "")
+                 && (nameBox5.Text == "") && (nameBox6.Text == "") && (nameBox7.Text == "") && (nameBox8.Text == "")
+                 && (nameBox9.Text == ""));              
+        }
+
         public MainWindow()
         {
             client = new MoneyVKarmaneClient();
@@ -63,20 +72,35 @@ namespace MoneyVkarmane
             string nameStr = nameBox1.Text + "," + nameBox2.Text + "," + nameBox3.Text + "," + nameBox4.Text + "," + nameBox5.Text + "," + nameBox6.Text + "," + nameBox7.Text + "," + nameBox8.Text + "," + nameBox9.Text;
             try
             {
+                if (this.allNameBoxesAreEmty())
+                {
+                    registrationGrid.Opacity = 0.1;
+                    errorCommentLabel.Content = "Укажите хотя бы одного члена семьи";
+                    errorBorder.Visibility = System.Windows.Visibility.Visible;
+                    return;
+                }
                 bool flag = client.AddClient(newLoginBox.Text, newPasswordBox.Password, nameStr);
                 if (flag)
                 {
                     this.temporaryLogin = newLoginBox.Text;
+                    this.temporaryNameList = client.GetNameList(temporaryLogin);
                     registrationGrid.Visibility = System.Windows.Visibility.Hidden;
                     budgetTableGrid.Visibility = System.Windows.Visibility.Visible;
                     this.Height = 700;
                     this.Width = 1100;
                     budgetChangesDataGrid.ItemsSource = client.GetAllSums(newLoginBox.Text);
                 }
+                else
+                {
+                    registrationGrid.Opacity = 0.1;
+                    errorCommentLabel.Content = "Данный логин уже занят";
+                    errorBorder.Visibility = System.Windows.Visibility.Visible;
+                }
             }
             catch (System.ServiceModel.EndpointNotFoundException)
             {
                 registrationGrid.Opacity = 0.1;
+                errorCommentLabel.Content = "Нет подключения к серверу";
                 errorBorder.Visibility = System.Windows.Visibility.Visible;
             }
         }
@@ -85,6 +109,7 @@ namespace MoneyVkarmane
         {
             budgetChangesDataGrid.Opacity = 0.1;
             addNewSumBorder.Visibility = System.Windows.Visibility.Visible;
+            nameComboBox.ItemsSource = this.temporaryNameList;
         }
 
         private void backNewSumButton_Click(object sender, RoutedEventArgs e)
@@ -105,6 +130,7 @@ namespace MoneyVkarmane
                     aimOrWhereBox.Items.Add("Счет: газ");
                     aimOrWhereBox.Items.Add("Счет: электричество");
                     aimOrWhereBox.Items.Add("Счет: интернет");
+                    aimOrWhereBox.Items.Add("Питание");
                     aimOrWhereBox.Items.Add("Автомобиль");
                     aimOrWhereBox.Items.Add("Транспорт");
                     aimOrWhereBox.Items.Add("Кредит/ Долг");
@@ -140,8 +166,8 @@ namespace MoneyVkarmane
 
         private void okAddButton_Click(object sender, RoutedEventArgs e)
         {
-            //try
-            //{
+            try
+            {
                 DateTime data = new DateTime();
                 if (nowCheckBox.IsChecked == true)
                     data = DateTime.Now;
@@ -154,16 +180,19 @@ namespace MoneyVkarmane
                     moneyType = "€";
                 if (dollarCheckBox.IsChecked == true)
                     moneyType = "$";
-                client.AddSum(temporaryLogin, nameBox.Text, double.Parse(sumBox.Text), aimOrWhereBox.Text, commentBox.Text, data, moneyType);
+                client.AddSum(temporaryLogin, nameComboBox.Text, double.Parse(sumBox.Text), aimOrWhereBox.Text, commentBox.Text, data, moneyType);
                 budgetChangesDataGrid.ItemsSource = null;
                 budgetChangesDataGrid.ItemsSource = client.GetAllSums(this.temporaryLogin);
                 addNewSumBorder.Visibility = System.Windows.Visibility.Hidden;
                 budgetChangesDataGrid.Opacity = 1;
 
-            //}
-            //catch (Exception)
-            //{
-            //}
+            }
+            catch (System.FormatException)
+            {
+                budgetTableGrid.Opacity = 0.1;
+                errorCommentLabel.Content = "Укажите верные данные";
+                errorBorder.Visibility = System.Windows.Visibility.Visible;
+            }
         }
 
         private void rubleCheckBox_Checked(object sender, RoutedEventArgs e)
@@ -195,6 +224,7 @@ namespace MoneyVkarmane
                     startGrid.Visibility = System.Windows.Visibility.Hidden;
                     budgetTableGrid.Visibility = System.Windows.Visibility.Visible;
                     temporaryLogin = loginBox.Text;
+                    temporaryNameList = client.GetNameList(temporaryLogin);
                     budgetChangesDataGrid.ItemsSource = client.GetAllSums(this.temporaryLogin);
                 }
                 else
@@ -216,6 +246,7 @@ namespace MoneyVkarmane
             errorBorder.Visibility = System.Windows.Visibility.Hidden;
             startGrid.Opacity = 1;
             registrationGrid.Opacity = 1;
+            budgetTableGrid.Opacity = 1;
         }
 
         private void budgetChangesDataGrid_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
@@ -234,7 +265,6 @@ namespace MoneyVkarmane
             FrameworkElementFactory tb = new FrameworkElementFactory(typeof(TextBlock));
             tb.SetValue(TextBlock.TextWrappingProperty, TextWrapping.Wrap);
             dataTemplate.VisualTree = tb;
-
             dgtc.Header = dgTextC.Header;
             dgtc.CellTemplate = dataTemplate;          
             string headername = dgtc.Header.ToString();
@@ -260,6 +290,50 @@ namespace MoneyVkarmane
         private void nowCheckBox_Checked(object sender, RoutedEventArgs e)
         {
             timeBox.Text = DateTime.Now.ToString();
+        }
+
+        private void logoutButton_Click(object sender, RoutedEventArgs e)
+        {
+            budgetTableGrid.Visibility = System.Windows.Visibility.Hidden;
+            startGrid.Visibility = System.Windows.Visibility.Visible;
+            this.Height = 550;
+            this.Width = 900;
+            this.temporaryLogin = "";
+            this.temporaryNameList.Clear();
+            loginBox.Text = "";
+            passwordBox.Password = "";
+            newLoginBox.Text = "";
+            newPasswordBox.Password = "";
+            sumBox.Text = "";
+            commentBox.Text = "";
+            this.nameBox1.Text = "";
+            this.nameBox2.Text = "";
+            this.nameBox3.Text = "";
+            this.nameBox4.Text = "";
+            this.nameBox5.Text = "";
+            this.nameBox6.Text = "";
+            this.nameBox7.Text = "";
+            this.nameBox8.Text = "";
+            this.nameBox9.Text = "";
+        }
+
+        private void budgetChangesDataGrid_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
+        {
+                deleteRowButton.Visibility = System.Windows.Visibility.Visible;
+        }
+
+        private void deleteRowButton_Click(object sender, RoutedEventArgs e)
+        {
+            SumChange change = (SumChange)budgetChangesDataGrid.SelectedItem;
+            client.DeleteRecord(this.temporaryLogin, change.Name, change.Change, change.Aim,change.Comment, change.Time, change.Money);
+            budgetChangesDataGrid.ItemsSource = client.GetAllSums(this.temporaryLogin);
+            deleteRowButton.Visibility = System.Windows.Visibility.Hidden;
+        }
+
+        private void budgetChangesDataGrid_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            budgetChangesDataGrid.UnselectAll();
+            deleteRowButton.Visibility = System.Windows.Visibility.Hidden;
         }
 
     }

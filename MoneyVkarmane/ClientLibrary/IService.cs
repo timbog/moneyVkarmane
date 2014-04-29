@@ -33,5 +33,13 @@ namespace ClientLibrary
         [OperationContract]
         [WebGet(BodyStyle = WebMessageBodyStyle.Wrapped)]
         int GetId(string login);
+
+        [OperationContract]
+        [WebGet(BodyStyle = WebMessageBodyStyle.Wrapped)]
+        string GetNames(string login);
+
+        [OperationContract]
+        [WebInvoke(BodyStyle = WebMessageBodyStyle.Wrapped)]
+        void DeleteItem(string login, string name, Nullable<double> sum, string aim, string comment, Nullable<System.DateTime> date, string monType);
     }
 }

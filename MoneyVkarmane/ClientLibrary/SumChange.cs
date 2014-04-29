@@ -8,9 +8,8 @@ namespace ClientLibrary
 {
     public struct SumChange
     {
-        public SumChange(int clientId, string name, string aimOrWhere, Nullable<double> change, Nullable<System.DateTime> time, string comment, string money):this()
+        public SumChange(string name, string aimOrWhere, Nullable<double> change, Nullable<System.DateTime> time, string comment, string money):this()
         {
-            this.Id = clientId;
             this.Name = name;
             this.Aim = aimOrWhere;
             this.Change = change;
@@ -30,8 +29,6 @@ namespace ClientLibrary
         public string Aim { get; set; }
 
         public string Comment { get; set; }
-
-        public int Id { get; set; }
 
     }
 }

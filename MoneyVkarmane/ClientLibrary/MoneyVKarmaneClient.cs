@@ -10,7 +10,7 @@ namespace ClientLibrary
     {
         public MoneyVKarmaneClient()
         {
-            this.client = new Client("http://192.168.1.203:8000");
+            this.client = new Client("http://localhost:8000");
         }
 
         private Client client;
@@ -38,6 +38,32 @@ namespace ClientLibrary
         public int GetIdentification(string login)
         {
             return client.service.GetId(login);
+        }
+
+        public List<string> GetNameList(string login)
+        {
+            string temp = client.service.GetNames(login);
+            int iter = 0;
+            List<string> nameList = new List<string>();
+            string name = "";
+            while (iter < temp.Length)
+            {
+                if (temp[iter] != ',')
+                    name = name + temp[iter];
+                else
+                {
+                    if (!String.Equals(name, ""))
+                        nameList.Add(name);
+                    name = "";       
+                }
+                ++iter;
+            }
+            return nameList;
+        }
+
+        public void DeleteRecord(string login, string name, Nullable<double> sum, string aim, string comment, Nullable<System.DateTime> date, string monType)
+        {
+            client.service.DeleteItem(login, name, sum, aim, comment, date, monType);
         }
     }
 }
