@@ -28,6 +28,8 @@ namespace MoneyVkarmane
 
         private string temporaryLogin;
 
+        private Valutes valutes;
+
         public List<string> temporaryNameList;
 
         private bool allNameBoxesAreEmty()
@@ -37,10 +39,28 @@ namespace MoneyVkarmane
                  && (nameBox9.Text == ""));              
         }
 
+        private void SetCourses()
+        {
+            try
+            {
+                valutes = new Valutes();
+                var x = valutes.GetValuteCourse()[0];
+                var y = valutes.GetValuteCourse()[1];
+                this.dollarRoubleLabel.Content = "Курс долл.: " + x;
+                this.euroRoubleLabel.Content = "Курс евро: " + y;
+            }
+            catch (System.Net.WebException)
+            {
+                this.euroRoubleLabel.Content = "Нет подключения";
+                this.dollarRoubleLabel.Content = "к интернету";
+            }
+        }
+
         public MainWindow()
         {
             client = new MoneyVKarmaneClient();
             InitializeComponent();
+            SetCourses();
         }
 
         private void registrationButton_Click(object sender, RoutedEventArgs e)
@@ -89,6 +109,16 @@ namespace MoneyVkarmane
                     this.Height = 700;
                     this.Width = 1100;
                     budgetChangesDataGrid.ItemsSource = client.GetAllSums(newLoginBox.Text);
+                    for (int i = 0; i < this.temporaryNameList.Count; ++i)
+                    {
+                        if (nameTextBlock.Text != "")
+                            nameTextBlock.Text = nameTextBlock.Text + ", " + this.temporaryNameList[i];
+                        else
+                            nameTextBlock.Text = this.temporaryNameList[i];
+                    }
+                    this.roubleLabel.Content = "Руб.: " + client.GetNowBudget(temporaryLogin)[0].ToString();
+                    this.euroLabel.Content = "€: " + client.GetNowBudget(temporaryLogin)[1].ToString();
+                    this.dollarLabel.Content = "$: " + client.GetNowBudget(temporaryLogin)[2].ToString();
                 }
                 else
                 {
@@ -108,14 +138,20 @@ namespace MoneyVkarmane
         private void addNewSumButton_Click(object sender, RoutedEventArgs e)
         {
             budgetChangesDataGrid.Opacity = 0.1;
+
             addNewSumBorder.Visibility = System.Windows.Visibility.Visible;
-            nameComboBox.ItemsSource = this.temporaryNameList;
+            nameComboBox.Items.Clear();
+            for (int i = 0; i < temporaryNameList.Count; ++i)
+            {
+                nameComboBox.Items.Add(temporaryNameList[i]);
+            }
         }
 
         private void backNewSumButton_Click(object sender, RoutedEventArgs e)
         {
             addNewSumBorder.Visibility = System.Windows.Visibility.Hidden;
             budgetChangesDataGrid.Opacity = 1;
+
         }
 
         private void sumBox_LostKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
@@ -184,8 +220,17 @@ namespace MoneyVkarmane
                 budgetChangesDataGrid.ItemsSource = null;
                 budgetChangesDataGrid.ItemsSource = client.GetAllSums(this.temporaryLogin);
                 addNewSumBorder.Visibility = System.Windows.Visibility.Hidden;
+
                 budgetChangesDataGrid.Opacity = 1;
 
+                commentBox.Text = "";
+                sumBox.Text = "";
+                euroCheckBox.IsChecked = false;
+                dollarCheckBox.IsChecked = false;
+                rubleCheckBox.IsChecked = false;
+                this.roubleLabel.Content = "Руб.: " + client.GetNowBudget(temporaryLogin)[0].ToString();
+                this.euroLabel.Content = "€: " + client.GetNowBudget(temporaryLogin)[1].ToString();
+                this.dollarLabel.Content = "$: " + client.GetNowBudget(temporaryLogin)[2].ToString();
             }
             catch (System.FormatException)
             {
@@ -226,6 +271,16 @@ namespace MoneyVkarmane
                     temporaryLogin = loginBox.Text;
                     temporaryNameList = client.GetNameList(temporaryLogin);
                     budgetChangesDataGrid.ItemsSource = client.GetAllSums(this.temporaryLogin);
+                    for (int i = 0; i < this.temporaryNameList.Count; ++i)
+                    {
+                        if (nameTextBlock.Text != "")
+                            nameTextBlock.Text = nameTextBlock.Text + ", " + this.temporaryNameList[i];
+                        else
+                            nameTextBlock.Text = this.temporaryNameList[i];
+                    }
+                    this.roubleLabel.Content = "Руб.: " + client.GetNowBudget(temporaryLogin)[0].ToString();
+                    this.euroLabel.Content = "€: " + client.GetNowBudget(temporaryLogin)[1].ToString();
+                    this.dollarLabel.Content = "$: " + client.GetNowBudget(temporaryLogin)[2].ToString();
                 }
                 else
                 {
@@ -315,6 +370,7 @@ namespace MoneyVkarmane
             this.nameBox7.Text = "";
             this.nameBox8.Text = "";
             this.nameBox9.Text = "";
+            this.nameTextBlock.Text = "";
         }
 
         private void budgetChangesDataGrid_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
@@ -328,6 +384,9 @@ namespace MoneyVkarmane
             client.DeleteRecord(this.temporaryLogin, change.Name, change.Change, change.Aim,change.Comment, change.Time, change.Money);
             budgetChangesDataGrid.ItemsSource = client.GetAllSums(this.temporaryLogin);
             deleteRowButton.Visibility = System.Windows.Visibility.Hidden;
+            this.roubleLabel.Content = "Руб.: " + client.GetNowBudget(temporaryLogin)[0].ToString();
+            this.euroLabel.Content = "€: " + client.GetNowBudget(temporaryLogin)[1].ToString();
+            this.dollarLabel.Content = "$: " + client.GetNowBudget(temporaryLogin)[2].ToString();
         }
 
         private void budgetChangesDataGrid_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
@@ -335,6 +394,32 @@ namespace MoneyVkarmane
             budgetChangesDataGrid.UnselectAll();
             deleteRowButton.Visibility = System.Windows.Visibility.Hidden;
         }
+
+        private void addNameButton_Click(object sender, RoutedEventArgs e)
+        {
+            budgetChangesDataGrid.Opacity = 0.1;
+            addNewNameBorder.Visibility = System.Windows.Visibility.Visible;
+        }
+
+        private void addNewNameBackButton_Click(object sender, RoutedEventArgs e)
+        {
+            budgetChangesDataGrid.Opacity = 1;
+            addNewNameBorder.Visibility = System.Windows.Visibility.Hidden;
+        }
+
+        private void addNewNameOkButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (newNameTextBox.Text != "")
+            {
+                client.AddNewName(this.temporaryLogin, newNameTextBox.Text);
+                nameTextBlock.Text = nameTextBlock.Text + ", " + newNameTextBox.Text;
+                this.temporaryNameList.Add(newNameTextBox.Text);
+                
+            }
+            budgetChangesDataGrid.Opacity = 1;
+            addNewNameBorder.Visibility = System.Windows.Visibility.Hidden;
+        }
+
 
     }
 }

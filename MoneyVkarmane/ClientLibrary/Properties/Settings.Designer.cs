@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MoneyVkarmane.Properties {
+namespace ClientLibrary.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
@@ -27,9 +27,9 @@ namespace MoneyVkarmane.Properties {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
         [global::System.Configuration.DefaultSettingValueAttribute("http://www.cbr.ru/DailyInfoWebServ/DailyInfo.asmx")]
-        public string MoneyVkarmane_RBKServise_DailyInfo {
+        public string ClientLibrary_RBKServise_DailyInfo {
             get {
-                return ((string)(this["MoneyVkarmane_RBKServise_DailyInfo"]));
+                return ((string)(this["ClientLibrary_RBKServise_DailyInfo"]));
             }
         }
     }

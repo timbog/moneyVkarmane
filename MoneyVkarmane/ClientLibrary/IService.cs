@@ -41,5 +41,13 @@ namespace ClientLibrary
         [OperationContract]
         [WebInvoke(BodyStyle = WebMessageBodyStyle.Wrapped)]
         void DeleteItem(string login, string name, Nullable<double> sum, string aim, string comment, Nullable<System.DateTime> date, string monType);
+
+        [OperationContract]
+        [WebInvoke(BodyStyle = WebMessageBodyStyle.Wrapped)]
+        void AddName(string login, string name);
+
+        [OperationContract]
+        [WebGet(BodyStyle = WebMessageBodyStyle.Wrapped)]
+        Nullable<double>[] GetBudget(string login);
     }
 }

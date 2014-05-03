@@ -49,11 +49,15 @@ namespace ClientLibrary
             while (iter < temp.Length)
             {
                 if (temp[iter] != ',')
+                {
                     name = name + temp[iter];
+                    if (iter == temp.Length - 1) 
+                        nameList.Add(name);   
+                }                
                 else
                 {
                     if (!String.Equals(name, ""))
-                        nameList.Add(name);
+                        nameList.Add(name); 
                     name = "";       
                 }
                 ++iter;
@@ -64,6 +68,16 @@ namespace ClientLibrary
         public void DeleteRecord(string login, string name, Nullable<double> sum, string aim, string comment, Nullable<System.DateTime> date, string monType)
         {
             client.service.DeleteItem(login, name, sum, aim, comment, date, monType);
+        }
+
+        public void AddNewName(string login, string name)
+        {
+            client.service.AddName(login, name);
+        }
+
+        public Nullable<double>[] GetNowBudget(string login)
+        {
+            return client.service.GetBudget(login);
         }
     }
 }
