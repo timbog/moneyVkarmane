@@ -10,7 +10,7 @@ namespace ClientLibrary
     {
         public MoneyVKarmaneClient()
         {
-            this.client = new Client("http://localhost:8000");
+            this.client = new Client("http://77.241.39.168:8000");
         }
 
         private Client client;
