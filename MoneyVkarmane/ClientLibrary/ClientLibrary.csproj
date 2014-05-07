@@ -52,6 +52,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="Statistics.cs" />
     <Compile Include="SumChange.cs" />
     <Compile Include="Web References\RBKServise\Reference.cs">
       <AutoGen>True</AutoGen>

@@ -107,7 +107,7 @@ namespace MoneyVkarmane
                     registrationGrid.Visibility = System.Windows.Visibility.Hidden;
                     budgetTableGrid.Visibility = System.Windows.Visibility.Visible;
                     this.Height = 700;
-                    this.Width = 1100;
+                    this.Width = 1150;
                     budgetChangesDataGrid.ItemsSource = client.GetAllSums(newLoginBox.Text);
                     for (int i = 0; i < this.temporaryNameList.Count; ++i)
                     {
@@ -138,8 +138,10 @@ namespace MoneyVkarmane
         private void addNewSumButton_Click(object sender, RoutedEventArgs e)
         {
             budgetChangesDataGrid.Opacity = 0.1;
+            statisticsDataGrid.Opacity = 0.1;
 
             addNewSumBorder.Visibility = System.Windows.Visibility.Visible;
+            addNewNameBorder.Focus();
             nameComboBox.Items.Clear();
             for (int i = 0; i < temporaryNameList.Count; ++i)
             {
@@ -151,7 +153,7 @@ namespace MoneyVkarmane
         {
             addNewSumBorder.Visibility = System.Windows.Visibility.Hidden;
             budgetChangesDataGrid.Opacity = 1;
-
+            statisticsDataGrid.Opacity = 1;
         }
 
         private void sumBox_LostKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
@@ -164,7 +166,7 @@ namespace MoneyVkarmane
                     aimOrWhereBox.Items.Clear();
                     aimOrWhereBox.Items.Add("Счет: вода");
                     aimOrWhereBox.Items.Add("Счет: газ");
-                    aimOrWhereBox.Items.Add("Счет: электричество");
+                    aimOrWhereBox.Items.Add("Счет:электричество");
                     aimOrWhereBox.Items.Add("Счет: интернет");
                     aimOrWhereBox.Items.Add("Питание");
                     aimOrWhereBox.Items.Add("Автомобиль");
@@ -222,6 +224,7 @@ namespace MoneyVkarmane
                 addNewSumBorder.Visibility = System.Windows.Visibility.Hidden;
 
                 budgetChangesDataGrid.Opacity = 1;
+                statisticsDataGrid.Opacity = 1;
 
                 commentBox.Text = "";
                 sumBox.Text = "";
@@ -231,10 +234,13 @@ namespace MoneyVkarmane
                 this.roubleLabel.Content = "Руб.: " + client.GetNowBudget(temporaryLogin)[0].ToString();
                 this.euroLabel.Content = "€: " + client.GetNowBudget(temporaryLogin)[1].ToString();
                 this.dollarLabel.Content = "$: " + client.GetNowBudget(temporaryLogin)[2].ToString();
+                this.timeBox.Text = "";
+                this.nowCheckBox.IsChecked = false;
             }
             catch (System.FormatException)
             {
                 budgetTableGrid.Opacity = 0.1;
+                statisticsDataGrid.Opacity = 0.1;
                 errorCommentLabel.Content = "Укажите верные данные";
                 errorBorder.Visibility = System.Windows.Visibility.Visible;
             }
@@ -265,7 +271,7 @@ namespace MoneyVkarmane
                 if (client.SuccesfulLogin(loginBox.Text, passwordBox.Password))
                 {
                     this.Height = 700;
-                    this.Width = 1100;
+                    this.Width = 1150;
                     startGrid.Visibility = System.Windows.Visibility.Hidden;
                     budgetTableGrid.Visibility = System.Windows.Visibility.Visible;
                     temporaryLogin = loginBox.Text;
@@ -398,12 +404,14 @@ namespace MoneyVkarmane
         private void addNameButton_Click(object sender, RoutedEventArgs e)
         {
             budgetChangesDataGrid.Opacity = 0.1;
+            statisticsDataGrid.Opacity = 0.1;
             addNewNameBorder.Visibility = System.Windows.Visibility.Visible;
         }
 
         private void addNewNameBackButton_Click(object sender, RoutedEventArgs e)
         {
             budgetChangesDataGrid.Opacity = 1;
+            statisticsDataGrid.Opacity = 1;
             addNewNameBorder.Visibility = System.Windows.Visibility.Hidden;
         }
 
@@ -417,9 +425,28 @@ namespace MoneyVkarmane
                 
             }
             budgetChangesDataGrid.Opacity = 1;
-            addNewNameBorder.Visibility = System.Windows.Visibility.Hidden;
+            statisticsDataGrid.Opacity = 1;
+            addNewNameBorder.Visibility = System.Windows.Visibility.Hidden;            
         }
 
+        private void tableButton_Click(object sender, RoutedEventArgs e)
+        {
+            statisticsDataGrid.Visibility = System.Windows.Visibility.Hidden;
+            budgetChangesDataGrid.Visibility = System.Windows.Visibility.Visible;
+            this.dataGridLabel.Content = "Таблица данных";
+            addNewSumButton.Visibility = System.Windows.Visibility.Visible;
+        }
 
+        private void statisticsButton_Click(object sender, RoutedEventArgs e)
+        {
+            budgetChangesDataGrid.Visibility = System.Windows.Visibility.Hidden;
+            statisticsDataGrid.Visibility = System.Windows.Visibility.Visible;
+            this.dataGridLabel.Content = "Статистика";
+            statisticsDataGrid.ItemsSource = client.GetStat(this.temporaryLogin, valutes.GetValuteCourse()[0], valutes.GetValuteCourse()[1]);
+            statisticsDataGrid.Items.Refresh();
+            addNewSumButton.Visibility = System.Windows.Visibility.Hidden;
+            deleteRowButton.Visibility = System.Windows.Visibility.Hidden;
+        }
+       
     }
 }

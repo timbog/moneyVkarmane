@@ -49,5 +49,10 @@ namespace ClientLibrary
         [OperationContract]
         [WebGet(BodyStyle = WebMessageBodyStyle.Wrapped)]
         Nullable<double>[] GetBudget(string login);
+
+        [OperationContract]
+        [XmlSerializerFormat]
+        [WebGet(RequestFormat = WebMessageFormat.Xml, ResponseFormat = WebMessageFormat.Xml, BodyStyle = WebMessageBodyStyle.Wrapped)]
+        List<Statistics> Stat(string login, double course1, double course2);
     }
 }

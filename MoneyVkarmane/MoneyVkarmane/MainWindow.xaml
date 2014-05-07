@@ -3,6 +3,21 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Name="startWindow" x:Class="MoneyVkarmane.MainWindow"
         Title="MoneyVkarmane" Height="550" Width="900" HorizontalAlignment="Center" VerticalAlignment="Top">
+    <Window.Resources>
+        <Style x:Key="WrappedColumnHeaderStyle" TargetType="{x:Type DataGridColumnHeader}">
+            <Setter Property="ContentTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <TextBlock TextWrapping="Wrap" Text="{Binding}"></TextBlock>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="CellRightAlign">
+            <Setter Property="Control.HorizontalAlignment"
+            Value="Right" />
+        </Style>
+    </Window.Resources>
     <Grid x:Name="mainGrid" Margin="0,0,-8,-5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
         <Grid.RowDefinitions>
             <RowDefinition Height="143*"/>
@@ -119,9 +134,9 @@
                 <RowDefinition Height="10*"/>
                 <RowDefinition Height="36*"/>
                 <RowDefinition Height="18*"/>
-                <RowDefinition Height="20*"/>
+                <RowDefinition Height="18*"/>
                 <RowDefinition Height="7*"/>
-                <RowDefinition Height="54*"/>
+                <RowDefinition Height="56*"/>
                 <RowDefinition Height="11*"/>
                 <RowDefinition Height="32*"/>
                 <RowDefinition Height="6*"/>
@@ -137,7 +152,8 @@
                 <RowDefinition Height="13*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="47*"/>
+                <ColumnDefinition Width="8*"/>
+                <ColumnDefinition Width="36*"/>
                 <ColumnDefinition Width="28*"/>
                 <ColumnDefinition Width="22*"/>
                 <ColumnDefinition Width="30*"/>
@@ -147,12 +163,13 @@
                 <ColumnDefinition Width="7*"/>
                 <ColumnDefinition Width="65*"/>
                 <ColumnDefinition Width="362*"/>
-                <ColumnDefinition Width="155*"/>
+                <ColumnDefinition Width="84*"/>
+                <ColumnDefinition Width="71*"/>
                 <ColumnDefinition Width="72*"/>
                 <ColumnDefinition Width="19*"/>
             </Grid.ColumnDefinitions>
             <DataGrid x:Name="budgetChangesDataGrid" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch" Visibility="Visible" BorderThickness="0"
-                      CanUserResizeColumns="False" ColumnWidth="60*" Grid.Column="8" Grid.RowSpan="15" Grid.ColumnSpan="5" CanUserReorderColumns ="False"
+                      CanUserResizeColumns="False" ColumnWidth="60*" Grid.Column="9" Grid.RowSpan="15" Grid.ColumnSpan="6" CanUserReorderColumns ="False"
                       CanUserResizeRows	="False" RowHeight ="60" FontSize="20" AutoGeneratingColumn="budgetChangesDataGrid_AutoGeneratingColumn" Grid.Row="3" 
                       SelectedCellsChanged ="budgetChangesDataGrid_SelectedCellsChanged" Background="White" MouseRightButtonDown ="budgetChangesDataGrid_MouseRightButtonDown"
                       >
@@ -167,11 +184,11 @@
                 </DataGrid.CellStyle>
             </DataGrid>
             <Button x:Name="addNewSumButton" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="1"
-                    VerticalContentAlignment="Center" HorizontalContentAlignment="Center"  Click="addNewSumButton_Click" Grid.Column="5" BorderThickness="0" Grid.ColumnSpan="2" Background="White" Grid.RowSpan="3">
+                    VerticalContentAlignment="Center" HorizontalContentAlignment="Center"  Click="addNewSumButton_Click" Grid.Column="6" BorderThickness="0" Grid.ColumnSpan="2" Background="White" Grid.RowSpan="3">
                 <Image Margin ="-12 " Source="plus.png" />
 
             </Button>
-            <Border x:Name="addNewSumBorder" BorderBrush="PowderBlue" BorderThickness="3" Grid.Column="9" Grid.Row="3" Visibility="Hidden" Grid.RowSpan="8" Margin="0,0,0,1" Grid.ColumnSpan="2">
+            <Border x:Name="addNewSumBorder" BorderBrush="#FF13A6EA" BorderThickness="3" Grid.Column="10" Grid.Row="3" Visibility="Hidden" Grid.RowSpan="8"  Grid.ColumnSpan="2" Background="White">
                 <Grid x:Name="addNewSumGrid" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="2" Background="White">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="60*"/>
@@ -221,27 +238,116 @@
                     <TextBox x:Name="timeBox" Grid.ColumnSpan="3" Grid.Column="1" HorizontalAlignment="Stretch" Grid.Row="1" Text="" VerticalAlignment="Stretch" FontSize="20"/>
                     <TextBox x:Name="sumBox" Grid.ColumnSpan="3" Grid.Column="1" HorizontalAlignment="Stretch" Grid.Row="3" TextWrapping="Wrap" Text="" VerticalAlignment="Stretch" FontSize="20" LostKeyboardFocus="sumBox_LostKeyboardFocus"/>
                     <TextBox x:Name="commentBox" Grid.ColumnSpan="3" Grid.Column="1" HorizontalAlignment="Stretch" Grid.Row="6" TextWrapping="Wrap" Text="" VerticalAlignment="Stretch" FontSize="20"/>
-                    <Button x:Name="okAddButton" Content="OK" Grid.Column="4" HorizontalAlignment="Stretch" Grid.Row="7" VerticalAlignment="Stretch" Background="PowderBlue" FontSize="20" BorderThickness="1" Click="okAddButton_Click"/>
-                    <Button x:Name="backNewSumButton" Content="Назад" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontSize="20" Grid.Row="7" Grid.Column="0" Background="Bisque" BorderThickness="1" Click="backNewSumButton_Click"/>
+                    <Button x:Name="okAddButton" Content="OK" Grid.Column="4" HorizontalAlignment="Stretch" Grid.Row="7" VerticalAlignment="Stretch" Background="PowderBlue" FontSize="20" BorderThickness="1" Click="okAddButton_Click" FontWeight="Bold"/>
+                    <Button x:Name="backNewSumButton" Content="Назад" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontSize="20" Grid.Row="7" Grid.Column="0" Background="Bisque" BorderThickness="1" Click="backNewSumButton_Click" FontWeight="Bold"/>
                     <ComboBox x:Name="aimOrWhereBox" Grid.ColumnSpan="3" Grid.Column="1" HorizontalAlignment="Stretch" Grid.Row="5" VerticalAlignment="Stretch"  FontSize="20"/>
                     <Label x:Name="addNewSumErrorLabel" Content="" Grid.Column="4" HorizontalAlignment="Stretch" Grid.Row="3" VerticalAlignment="Stretch" FontSize="20"/>
                     <ComboBox x:Name="nameComboBox" Grid.ColumnSpan="3" Grid.Column="1" HorizontalAlignment="Stretch" Grid.Row="2" VerticalAlignment="Stretch" FontSize="20"/>
                 </Grid>
             </Border>
-            <Button x:Name="logoutButton" Content="Выйти" Grid.Column="11" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Bisque" FontSize="20"
+            <Button x:Name="logoutButton" Content="Выйти" Grid.Column="13" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Bisque" FontSize="20"
                     FontWeight="Bold" Click="logoutButton_Click" Grid.Row="1"/>
-            <Label x:Name="dataGridLabel" Content="Таблица данных" Grid.Column="8" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.ColumnSpan="3" FontSize="40" HorizontalContentAlignment="Center" Grid.RowSpan="3" Margin="0,0,0,1"/>
-            <Button x:Name="deleteRowButton" Grid.Column="1" HorizontalAlignment="Stretch" Grid.Row="1" VerticalAlignment="Stretch"  FontSize="20" FontWeight="Bold" Visibility="Hidden" Click="deleteRowButton_Click" Grid.ColumnSpan="3" Background="White" Grid.RowSpan="3">
+            <Label x:Name="dataGridLabel" Content="Таблица данных" Grid.Column="9" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.ColumnSpan="4" FontSize="40" HorizontalContentAlignment="Center" Grid.RowSpan="3" Margin="0,0,0,1"/>
+            <Button x:Name="deleteRowButton" Grid.Column="2" HorizontalAlignment="Stretch" Grid.Row="1" VerticalAlignment="Stretch"  FontSize="20" FontWeight="Bold" Visibility="Hidden" Click="deleteRowButton_Click" Grid.ColumnSpan="3" Background="White" Grid.RowSpan="3">
                 <Image Margin ="-6 " Source="minus.png"  />
             </Button>
-            <Label x:Name="budgetTableNameLabel" Content="Члены семьи:" Grid.Column="2" HorizontalAlignment="Stretch" Grid.Row="9" VerticalAlignment="Stretch" Grid.ColumnSpan="6" FontSize="20" HorizontalContentAlignment="Left" Margin="0,0,0,1" FontWeight="Bold"/>
-            <TextBlock x:Name="nameTextBlock" Grid.Column="3" HorizontalAlignment="Stretch" Grid.Row="9" TextWrapping="Wrap" Text="" VerticalAlignment="Stretch" Grid.ColumnSpan="5" FontSize="20" Margin="0,29,0,1" Grid.RowSpan="2"/>
+            <Label x:Name="budgetTableNameLabel" Content="Члены семьи:" Grid.Column="3" HorizontalAlignment="Stretch" Grid.Row="9" VerticalAlignment="Stretch" Grid.ColumnSpan="6" FontSize="20" HorizontalContentAlignment="Left" Margin="0,0,0,1" FontWeight="Bold"/>
+            <TextBlock x:Name="nameTextBlock" Grid.Column="4" HorizontalAlignment="Stretch" Grid.Row="9" TextWrapping="Wrap" Text="" VerticalAlignment="Stretch" Grid.ColumnSpan="5" FontSize="20" Margin="0,29,0,1" Grid.RowSpan="2"/>
 
-            <Button x:Name="addNameButton" Grid.Column="6" HorizontalAlignment="Stretch" Grid.Row="12" VerticalAlignment="Stretch" FontSize="20" Background="White" Click="addNameButton_Click">
+            <Button x:Name="addNameButton" Grid.Column="7" HorizontalAlignment="Stretch" Grid.Row="12" VerticalAlignment="Stretch" FontSize="20" Background="White" Click="addNameButton_Click">
                 <Image Margin =" -7" Source="plus.png"/>
             </Button>
-            <Border x:Name="membersBorder" BorderBrush="PowderBlue" BorderThickness="3" Grid.ColumnSpan="6" Grid.Column="2" HorizontalAlignment="Stretch" Grid.Row="9" Grid.RowSpan="2" VerticalAlignment="Stretch" Margin="0,0,0,1"/>
-            <Border x:Name="addNewNameBorder" BorderBrush="PowderBlue" BorderThickness="3" Grid.Column="9" HorizontalAlignment="Stretch" Grid.Row="9" VerticalAlignment="Stretch" Visibility="Hidden" Background="White">
+            <Border x:Name="membersBorder" BorderBrush="#FF13A6EA" BorderThickness="3" Grid.ColumnSpan="6" Grid.Column="3" HorizontalAlignment="Stretch" Grid.Row="9" Grid.RowSpan="2" VerticalAlignment="Stretch" Margin="0,0,0,1"/>
+
+            <Label x:Name="nowBudgetLabel" Content="Ваш бюджет:" Grid.Column="3" HorizontalAlignment="Stretch" Grid.Row="14" VerticalAlignment="Stretch" Grid.ColumnSpan="6" FontSize="20" FontWeight="Bold"/>
+            <Label x:Name="roubleLabel" Content="" Grid.Column="3" HorizontalAlignment="Stretch" Grid.Row="15" VerticalAlignment="Stretch"  Grid.ColumnSpan="6" FontSize="18"/>
+            <Label x:Name="euroLabel" Content="" Grid.Column="3" Grid.Row="16" Grid.ColumnSpan="6" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontSize="18"/>
+            <Label x:Name="dollarLabel" Content="" Grid.Column="3" HorizontalAlignment="Stretch" Grid.Row="17" VerticalAlignment="Stretch" Grid.ColumnSpan="6" FontSize="18"/>
+            <Border x:Name="nowBudgetBorder" BorderBrush="#FF13A6EA" BorderThickness="3" Grid.Column="3" HorizontalAlignment="Stretch"  Grid.Row="14" Grid.RowSpan="4" VerticalAlignment="Stretch" Grid.ColumnSpan="6"/>
+            <Border x:Name="moneyBorder" BorderBrush="#FF13A6EA" BorderThickness="3" Grid.ColumnSpan="6" Grid.Column="3" HorizontalAlignment="Stretch" Grid.Row="5" Grid.RowSpan="3" VerticalAlignment="Stretch">
+                <Grid x:Name="moneyGrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="35*"/>
+                        <RowDefinition Height="21*"/>
+                        <RowDefinition Height="21*"/>
+                    </Grid.RowDefinitions>
+                    <Label x:Name="moneyLabel" Content="Курсы валют:" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontSize="20" FontWeight="Bold"/>
+                    <Label x:Name="euroRoubleLabel" Content="" HorizontalAlignment="Stretch"  Grid.Row="1" VerticalAlignment="Stretch" FontSize="18"/>
+                    <Label x:Name="dollarRoubleLabel" Content="" HorizontalAlignment="Stretch" Grid.Row="2" VerticalAlignment="Stretch" FontSize="18"/>
+                </Grid>
+            </Border>
+            <Button x:Name="tableButton" Content="Т" Grid.Column="1" HorizontalAlignment="Stretch" Grid.Row="1" VerticalAlignment="Stretch" BorderThickness="0" FontSize="30" FontWeight="Bold" Foreground="#FF13A6EA" Background="White" Template="{DynamicResource ButtonBaseControlTemplate1}" Click="tableButton_Click">
+                <Button.Resources>
+                    <ControlTemplate x:Key="ButtonBaseControlTemplate1" TargetType="{x:Type ButtonBase}">
+                        <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                            <ContentPresenter x:Name="contentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="Button.IsDefaulted" Value="True">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" TargetName="border" Value="White"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="#FF3C7FB1"/>
+                                <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="PowderBlue"></Setter>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" TargetName="border" Value="White"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="#FF2C628B"/>                               
+                            </Trigger>
+                            <Trigger Property="ToggleButton.IsChecked" Value="True">
+                                <Setter Property="Background" TargetName="border" Value="#FFBCDDEE"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="#FF245A83"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Background" TargetName="border" Value="#FFF4F4F4"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="#FFADB2B5"/>
+                                <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="#FF838383"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Button.Resources>
+            </Button>
+            <Button x:Name="statisticsButton" Content="С" Grid.Column="1" HorizontalAlignment="Stretch" Grid.Row="2" Grid.RowSpan="2" VerticalAlignment="Stretch" Background="White" FontSize="30" FontWeight="Bold" BorderThickness="0" Foreground="#FF13A6EA" Template="{DynamicResource ButtonBaseControlTemplate1}" Click="statisticsButton_Click">
+                <Button.Resources>
+                    <ControlTemplate x:Key="ButtonBaseControlTemplate1" TargetType="{x:Type ButtonBase}">
+                        <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True" d:IsLocked="True">
+                            <ContentPresenter x:Name="contentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" d:IsLocked="True"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="Button.IsDefaulted" Value="True">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" TargetName="border" Value="White"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="#FF3C7FB1"/>
+                                <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="PowderBlue"></Setter>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" TargetName="border" Value="White"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="#FF2C628B"/>
+                            </Trigger>
+                            <Trigger Property="ToggleButton.IsChecked" Value="True">
+                                <Setter Property="Background" TargetName="border" Value="#FFBCDDEE"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="#FF245A83"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Background" TargetName="border" Value="#FFF4F4F4"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="#FFADB2B5"/>
+                                <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="#FF838383"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Button.Resources>
+            </Button>
+            <DataGrid x:Name="statisticsDataGrid" Grid.Column="9" HorizontalAlignment="Stretch" Grid.Row="3" VerticalAlignment="Stretch" Grid.ColumnSpan="5" Grid.RowSpan="10" Background="White"  FontSize="20"
+                      BorderThickness="0" CanUserReorderColumns ="False" RowHeight ="60" Visibility="Hidden" AutoGenerateColumns="False" CanUserResizeRows	="False" CanUserResizeColumns="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn x:Name="nameColumn" Header="Статистический показатель" Width="40*" Binding="{Binding Path = stat}"/>
+                    <DataGridTextColumn x:Name="valueColumn" Header="Значение" Width="30*" Binding="{Binding Path = sum}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <Border x:Name="addNewNameBorder" BorderBrush="#FF13A6EA" BorderThickness="3" Grid.Column="10" HorizontalAlignment="Stretch" Grid.Row="9" VerticalAlignment="Stretch" Visibility="Hidden" Background="White">
                 <Grid x:Name="addNewNameGrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="8*"/>
@@ -264,25 +370,8 @@
                     <Button x:Name="addNewNameBackButton" Content="Назад" Grid.Column="1" HorizontalAlignment="Stretch" Grid.Row="3" VerticalAlignment="Stretch" Background="Bisque" FontSize="20" Click="addNewNameBackButton_Click"/>
                 </Grid>
             </Border>
-            <Label x:Name="nowBudgetLabel" Content="Ваш бюджет:" Grid.Column="2" HorizontalAlignment="Stretch" Grid.Row="14" VerticalAlignment="Stretch" Grid.ColumnSpan="6" FontSize="20" FontWeight="Bold"/>
-            <Label x:Name="roubleLabel" Content="" Grid.Column="2" HorizontalAlignment="Stretch" Grid.Row="15" VerticalAlignment="Stretch"  Grid.ColumnSpan="6" FontSize="18"/>
-            <Label x:Name="euroLabel" Content="" Grid.Column="2" Grid.Row="16" Grid.ColumnSpan="6" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontSize="18"/>
-            <Label x:Name="dollarLabel" Content="" Grid.Column="2" HorizontalAlignment="Stretch" Grid.Row="17" VerticalAlignment="Stretch" Grid.ColumnSpan="6" FontSize="18"/>
-            <Border x:Name="nowBudgetBorder" BorderBrush="PowderBlue" BorderThickness="3" Grid.Column="2" HorizontalAlignment="Stretch"  Grid.Row="14" Grid.RowSpan="4" VerticalAlignment="Stretch" Grid.ColumnSpan="6"/>
-            <Border x:Name="moneyBorder" BorderBrush="PowderBlue" BorderThickness="3" Grid.ColumnSpan="6" Grid.Column="2" HorizontalAlignment="Stretch" Grid.Row="5" Grid.RowSpan="3" VerticalAlignment="Stretch">
-                <Grid x:Name="moneyGrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="35*"/>
-                        <RowDefinition Height="21*"/>
-                        <RowDefinition Height="21*"/>
-                    </Grid.RowDefinitions>
-                    <Label x:Name="moneyLabel" Content="Курсы валют:" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontSize="20" FontWeight="Bold"/>
-                    <Label x:Name="euroRoubleLabel" Content="" HorizontalAlignment="Stretch"  Grid.Row="1" VerticalAlignment="Stretch" FontSize="18"/>
-                    <Label x:Name="dollarRoubleLabel" Content="" HorizontalAlignment="Stretch" Grid.Row="2" VerticalAlignment="Stretch" FontSize="18"/>
-                </Grid>
-            </Border>
         </Grid>
-        <Border x:Name="errorBorder" BorderBrush="PowderBlue" BorderThickness="3" Grid.Column="1" Grid.Row="1" Visibility="Hidden">
+        <Border x:Name="errorBorder" BorderBrush="#FF13A6EA" BorderThickness="3" Grid.Column="1" Grid.Row="1" Visibility="Hidden">
             <Grid x:Name="errorGrid" Grid.Column="1" HorizontalAlignment="Stretch" Grid.Row="1" Grid.RowSpan="5" VerticalAlignment="Stretch" Background="White" >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="142*"/>

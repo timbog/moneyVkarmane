@@ -79,5 +79,10 @@ namespace ClientLibrary
         {
             return client.service.GetBudget(login);
         }
+
+        public List<Statistics> GetStat(string login, double course1, double course2)
+        {
+            return client.service.Stat(login,course1,course2);
+        }
     }
 }
