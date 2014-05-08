@@ -166,7 +166,7 @@ namespace MoneyVkarmane
                     aimOrWhereBox.Items.Clear();
                     aimOrWhereBox.Items.Add("Счет: вода");
                     aimOrWhereBox.Items.Add("Счет: газ");
-                    aimOrWhereBox.Items.Add("Счет:электричество");
+                    aimOrWhereBox.Items.Add("Счет: электричество");
                     aimOrWhereBox.Items.Add("Счет: интернет");
                     aimOrWhereBox.Items.Add("Питание");
                     aimOrWhereBox.Items.Add("Автомобиль");
@@ -444,6 +444,8 @@ namespace MoneyVkarmane
             this.dataGridLabel.Content = "Статистика";
             statisticsDataGrid.ItemsSource = client.GetStat(this.temporaryLogin, valutes.GetValuteCourse()[0], valutes.GetValuteCourse()[1]);
             statisticsDataGrid.Items.Refresh();
+            statisticsDataGrid.Columns[0].IsReadOnly = true;
+            statisticsDataGrid.Columns[1].IsReadOnly = true;
             addNewSumButton.Visibility = System.Windows.Visibility.Hidden;
             deleteRowButton.Visibility = System.Windows.Visibility.Hidden;
         }

@@ -8,6 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("web%20references/rbkservise/dailyinfo.disco")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("mvknew.ico")]
 
 
