@@ -112,7 +112,7 @@
             <Label x:Name="passwordLabel" Content="Пароль:" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
             	HorizontalContentAlignment ="Right" FontSize ="23 " Margin="0,1,0,61" Grid.Row="4" Grid.RowSpan="2"/>
             <TextBox x:Name="loginBox" HorizontalAlignment="Stretch" Text="" VerticalAlignment="Stretch"
-            	HorizontalContentAlignment ="Stretch" FontSize ="23 " Grid.Column="1" Grid.Row="3" TextWrapping="Wrap" />
+            	HorizontalContentAlignment ="Stretch" FontSize ="23 " Grid.Column="1" Grid.Row="3" TextWrapping="Wrap"/>
             <PasswordBox x:Name="passwordBox" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
         		FontSize ="23" HorizontalContentAlignment ="Stretch" Grid.Column="1" Grid.Row="4" />
             <Button x:Name="registrationButton" Content="Регистрация" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
@@ -144,9 +144,9 @@
             <Label x:Name="newLoginLabel" Content="Новый логин:" HorizontalAlignment="Stretch" Grid.Row="2" VerticalAlignment="Stretch" FontSize ="23"
                    HorizontalContentAlignment ="Right"/>
             <Label x:Name="newPasswordLabel" Content="Пароль:" HorizontalAlignment="Stretch" Grid.Row="3" VerticalAlignment="Stretch" FontSize ="23"
-                   HorizontalContentAlignment ="Right"/>
+                   HorizontalContentAlignment ="Right" />
             <TextBox x:Name="newLoginBox" Grid.Column="1" HorizontalAlignment="Stretch" Grid.Row="2" Text="" VerticalAlignment="Stretch"
-                     FontSize ="23" TextWrapping="Wrap"/>
+                     FontSize ="23" TextWrapping="Wrap" />
             <PasswordBox x:Name="newPasswordBox" Grid.Column="1" HorizontalAlignment="Stretch" Grid.Row="3" VerticalAlignment="Stretch" FontSize ="23"/>
             <Button x:Name="addMembersButton" Content="Члены семьи:" HorizontalAlignment="Stretch" Grid.Row="5" VerticalAlignment="Stretch"
                      BorderThickness="0" FontSize ="23" FontWeight ="Bold" Click="addMembersButton_Click"/>
@@ -154,6 +154,8 @@
                      BorderThickness="0" FontSize ="23" FontWeight ="Bold" Click="createButton_Click"/>
             <Button x:Name="backButton" Content="Назад" HorizontalAlignment="Stretch" Grid.Row="6" VerticalAlignment="Stretch"
                     Foreground="#FFED1C24"  BorderThickness="0" FontSize ="23" Click="backButton_Click" FontWeight ="Bold"/>
+            <Label x:Name="confirmLabel" Content="Потверж. пароля:" HorizontalAlignment="Stretch" Grid.Row="4" VerticalAlignment="Stretch" FontSize="23" HorizontalContentAlignment="Right"/>
+            <PasswordBox x:Name="confirmPassswordBox" Grid.Column="1" HorizontalAlignment="Stretch" Grid.Row="4" VerticalAlignment="Stretch" FontSize="23"/>
         </Grid>
         <Grid x:Name="nameGrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Visibility="Hidden" Grid.ColumnSpan="3" Grid.RowSpan="3">
             <Grid.ColumnDefinitions>
@@ -412,10 +414,11 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="8*"/>
                         <ColumnDefinition Width="79*"/>
-                        <ColumnDefinition Width="61*"/>
-                        <ColumnDefinition Width="61*"/>
-                        <ColumnDefinition Width="70*"/>
-                        <ColumnDefinition Width="78*"/>
+                        <ColumnDefinition Width="63*"/>
+                        <ColumnDefinition Width="62*"/>
+                        <ColumnDefinition Width="71*"/>
+                        <ColumnDefinition Width="68*"/>
+                        <ColumnDefinition Width="10*"/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="41*"/>
@@ -424,13 +427,15 @@
                         <RowDefinition Height="33*"/>
                         <RowDefinition Height="7*"/>
                     </Grid.RowDefinitions>
-                    <Label x:Name="addNewNameLabel" Content="Добавить нового члена семьи" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontSize="23" FontWeight="Bold" Grid.ColumnSpan="6"/>
+                    <Label x:Name="addNewNameLabel" Content="Добавить нового члена семьи" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontSize="23" FontWeight="Bold" Grid.ColumnSpan="7" Margin="0,0,-0.487,0" HorizontalContentAlignment="Center"/>
                     <Label x:Name="newNameGridLabel" Content="Имя:" HorizontalAlignment="Stretch" Grid.Row="1" VerticalAlignment="Stretch" FontSize="23" Grid.ColumnSpan="2"/>
-                    <TextBox x:Name="newNameTextBox" Grid.Column="2" HorizontalAlignment="Stretch" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Stretch" FontSize="23" Grid.ColumnSpan="3"   />
-                    <Button x:Name="addNewNameOkButton" Content="ОК" Grid.Column="5" HorizontalAlignment="Stretch" Grid.Row="3" VerticalAlignment="Stretch" FontSize="23"  Click="addNewNameOkButton_Click" BorderThickness="0" FontWeight="Bold"/>
+                    <TextBox x:Name="newNameTextBox" Grid.Column="2" HorizontalAlignment="Stretch" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Stretch" FontSize="23" Grid.ColumnSpan="4" Margin="0,0,67.762,0"   />
+                    <Button x:Name="addNewNameOkButton" Content="ОК" Grid.Column="5" HorizontalAlignment="Stretch" Grid.Row="3" VerticalAlignment="Stretch" FontSize="23"  Click="addNewNameOkButton_Click" BorderThickness="0" FontWeight="Bold"   />
                     <Button x:Name="addNewNameBackButton" Content="Назад" Grid.Column="1" HorizontalAlignment="Stretch" Grid.Row="3" VerticalAlignment="Stretch" Foreground="#FFED1C24" FontSize="23" Click="addNewNameBackButton_Click" BorderThickness="0" FontWeight="Bold"/>
                 </Grid>
             </Border>
+            <Label x:Name="temporaryClientLabel" Content="" Grid.Column="11" HorizontalAlignment="Stretch" Grid.Row="1" VerticalAlignment="Stretch" Grid.ColumnSpan="2" FontSize="23" FontWeight="Bold" HorizontalContentAlignment="Right"
+                   VerticalContentAlignment="Center"/>
         </Grid>
         <Border x:Name="errorBorder" BorderBrush="#FF13A6EA" BorderThickness="3" Grid.Column="1" Grid.Row="1" Visibility="Hidden">
             <Grid x:Name="errorGrid" Grid.Column="1" HorizontalAlignment="Stretch" Grid.Row="1" Grid.RowSpan="5" VerticalAlignment="Stretch" Background="White" >
@@ -446,7 +451,7 @@
                     <RowDefinition Height="26*"/>
                 </Grid.RowDefinitions>
                 <Label x:Name="enterErrorLabel" Content="Ошибка" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" FontSize="35" Grid.ColumnSpan="3" />
-                <Label x:Name="errorCommentLabel" Content="Нет подключения к серверу" HorizontalAlignment="Stretch" Grid.Row="1" FontSize="20" HorizontalContentAlignment="Center" Grid.ColumnSpan="3"/>
+                <Label x:Name="errorCommentLabel" Content="Нет подключения к серверу" HorizontalAlignment="Stretch" Grid.Row="1" FontSize="20" HorizontalContentAlignment="Center" Grid.ColumnSpan="3" VerticalContentAlignment="Center"/>
                 <Button x:Name="errorOkButton" Content="ОК" Grid.Column="1" HorizontalAlignment="Stretch" Grid.Row="2" VerticalAlignment="Stretch"
          BorderThickness="0" FontSize ="23" FontWeight ="Bold" Click="errorOkButton_Click"/>
             </Grid>

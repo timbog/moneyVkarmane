@@ -99,11 +99,20 @@ namespace MoneyVkarmane
                     errorBorder.Visibility = System.Windows.Visibility.Visible;
                     return;
                 }
+                if ((this.confirmPassswordBox.Password != this.newPasswordBox.Password) || (this.newLoginBox.Text == "") ||
+                    (this.newPasswordBox.Password == ""))
+                {
+                    registrationGrid.Opacity = 0.1;
+                    errorCommentLabel.Content = "Неверные данные";
+                    errorBorder.Visibility = System.Windows.Visibility.Visible;
+                    return;
+                }
                 bool flag = client.AddClient(newLoginBox.Text, newPasswordBox.Password, nameStr);
                 if (flag)
                 {
                     this.temporaryLogin = newLoginBox.Text;
                     this.temporaryNameList = client.GetNameList(temporaryLogin);
+                    this.temporaryClientLabel.Content = this.temporaryLogin;
                     registrationGrid.Visibility = System.Windows.Visibility.Hidden;
                     budgetTableGrid.Visibility = System.Windows.Visibility.Visible;
                     this.Height = 700;
@@ -275,6 +284,7 @@ namespace MoneyVkarmane
                     startGrid.Visibility = System.Windows.Visibility.Hidden;
                     budgetTableGrid.Visibility = System.Windows.Visibility.Visible;
                     temporaryLogin = loginBox.Text;
+                    this.temporaryClientLabel.Content = this.temporaryLogin;
                     temporaryNameList = client.GetNameList(temporaryLogin);
                     budgetChangesDataGrid.ItemsSource = client.GetAllSums(this.temporaryLogin);
                     for (int i = 0; i < this.temporaryNameList.Count; ++i)
@@ -299,6 +309,7 @@ namespace MoneyVkarmane
                 {
                     startGrid.Opacity = 0.1;
                     errorBorder.Visibility = System.Windows.Visibility.Visible;
+                    errorCommentLabel.Content = "Нет подключения к серверу";
                 }
         }
 
@@ -377,6 +388,7 @@ namespace MoneyVkarmane
             this.nameBox8.Text = "";
             this.nameBox9.Text = "";
             this.nameTextBlock.Text = "";
+            this.confirmPassswordBox.Password = "";
         }
 
         private void budgetChangesDataGrid_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
