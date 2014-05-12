@@ -112,7 +112,7 @@ namespace MoneyVkarmane
                 {
                     this.temporaryLogin = newLoginBox.Text;
                     this.temporaryNameList = client.GetNameList(temporaryLogin);
-                    this.temporaryClientLabel.Content = this.temporaryLogin;
+                    this.temporaryClientButton.Content = this.temporaryLogin;
                     registrationGrid.Visibility = System.Windows.Visibility.Hidden;
                     budgetTableGrid.Visibility = System.Windows.Visibility.Visible;
                     this.Height = 700;
@@ -284,7 +284,7 @@ namespace MoneyVkarmane
                     startGrid.Visibility = System.Windows.Visibility.Hidden;
                     budgetTableGrid.Visibility = System.Windows.Visibility.Visible;
                     temporaryLogin = loginBox.Text;
-                    this.temporaryClientLabel.Content = this.temporaryLogin;
+                    this.temporaryClientButton.Content = this.temporaryLogin;
                     temporaryNameList = client.GetNameList(temporaryLogin);
                     budgetChangesDataGrid.ItemsSource = client.GetAllSums(this.temporaryLogin);
                     for (int i = 0; i < this.temporaryNameList.Count; ++i)
@@ -460,6 +460,54 @@ namespace MoneyVkarmane
             statisticsDataGrid.Columns[1].IsReadOnly = true;
             addNewSumButton.Visibility = System.Windows.Visibility.Hidden;
             deleteRowButton.Visibility = System.Windows.Visibility.Hidden;
+        }
+
+        private void temporaryClientButton_Click(object sender, RoutedEventArgs e)
+        {
+            budgetChangesDataGrid.Opacity = 0.1;
+            statisticsDataGrid.Opacity = 0.1;
+            changePasswordBorder.Visibility = System.Windows.Visibility.Visible;
+            addNewSumButton.IsEnabled = false;
+        }
+
+        private void okChangeButton_Click(object sender, RoutedEventArgs e)
+        {
+
+            if (changedPasswordBox.Password != confirmChangePasswordBox.Password)
+            {
+                errorBorder.Visibility = System.Windows.Visibility.Visible;
+                budgetTableGrid.Opacity = 0.1;
+                errorCommentLabel.Content = "Введите верные данные";
+            }
+            else
+            {
+                if (client.AnotherPassword(this.temporaryLogin, oldPasswordBox.Password, changedPasswordBox.Password) == false)
+                {
+                    errorBorder.Visibility = System.Windows.Visibility.Visible;
+                    budgetTableGrid.Opacity = 0.1;
+                    errorCommentLabel.Content = "Введите верные данные";
+                }
+                else
+                {
+                    exitPasswords();
+                }
+            }
+        }
+
+        private void exitPasswords()
+        {
+            changePasswordBorder.Visibility = System.Windows.Visibility.Hidden;
+            budgetChangesDataGrid.Opacity = 1;
+            statisticsDataGrid.Opacity = 1;
+            oldPasswordBox.Password = "";
+            changedPasswordBox.Password = "";
+            confirmChangePasswordBox.Password = "";
+            addNewSumButton.IsEnabled = true;
+        }
+
+        private void backChangeButton_Click(object sender, RoutedEventArgs e)
+        {
+            exitPasswords();
         }
        
     }

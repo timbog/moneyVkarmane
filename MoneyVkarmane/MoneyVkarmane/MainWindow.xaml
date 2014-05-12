@@ -154,7 +154,7 @@
                      BorderThickness="0" FontSize ="23" FontWeight ="Bold" Click="createButton_Click"/>
             <Button x:Name="backButton" Content="Назад" HorizontalAlignment="Stretch" Grid.Row="6" VerticalAlignment="Stretch"
                     Foreground="#FFED1C24"  BorderThickness="0" FontSize ="23" Click="backButton_Click" FontWeight ="Bold"/>
-            <Label x:Name="confirmLabel" Content="Потверж. пароля:" HorizontalAlignment="Stretch" Grid.Row="4" VerticalAlignment="Stretch" FontSize="23" HorizontalContentAlignment="Right"/>
+            <Label x:Name="confirmLabel" Content="Подтверж. пароля:" HorizontalAlignment="Stretch" Grid.Row="4" VerticalAlignment="Stretch" FontSize="23" HorizontalContentAlignment="Right"/>
             <PasswordBox x:Name="confirmPassswordBox" Grid.Column="1" HorizontalAlignment="Stretch" Grid.Row="4" VerticalAlignment="Stretch" FontSize="23"/>
         </Grid>
         <Grid x:Name="nameGrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Visibility="Hidden" Grid.ColumnSpan="3" Grid.RowSpan="3">
@@ -434,8 +434,40 @@
                     <Button x:Name="addNewNameBackButton" Content="Назад" Grid.Column="1" HorizontalAlignment="Stretch" Grid.Row="3" VerticalAlignment="Stretch" Foreground="#FFED1C24" FontSize="23" Click="addNewNameBackButton_Click" BorderThickness="0" FontWeight="Bold"/>
                 </Grid>
             </Border>
-            <Label x:Name="temporaryClientLabel" Content="" Grid.Column="11" HorizontalAlignment="Stretch" Grid.Row="1" VerticalAlignment="Stretch" Grid.ColumnSpan="2" FontSize="23" FontWeight="Bold" HorizontalContentAlignment="Right"
-                   VerticalContentAlignment="Center"/>
+            <Button x:Name="temporaryClientButton" Grid.ColumnSpan="2" Content="" Grid.Column="11" HorizontalAlignment="Stretch" Grid.Row="1" VerticalAlignment="Stretch" BorderThickness="0" HorizontalContentAlignment="Right" FontWeight="Bold" FontSize="23" VerticalContentAlignment="Center"
+                    Background="White" Click="temporaryClientButton_Click"/>
+            <Border x:Name="changePasswordBorder"  BorderBrush="#FF13A6EA" BorderThickness="3" Grid.Column="10" Grid.Row="3" Visibility="Hidden" Grid.RowSpan="8"  Grid.ColumnSpan="2" Background="White">
+                <Grid x:Name="changePasswordGrid" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="2" Background="White">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="60*"/>
+                        <RowDefinition Height="38*"/>
+                        <RowDefinition Height="38*"/>
+                        <RowDefinition Height="38*"/>
+                        <RowDefinition Height="38*"/>
+                        <RowDefinition Height="38*"/>
+                        <RowDefinition Height="38*"/>
+                        <RowDefinition Height="38*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="94*"/>
+                        <ColumnDefinition Width="85*"/>
+                        <ColumnDefinition Width="84*"/>
+                        <ColumnDefinition Width="84*"/>
+                        <ColumnDefinition Width="52*"/>
+                        <ColumnDefinition Width="42*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button x:Name="okChangeButton" Content="OK" Grid.Column="4" HorizontalAlignment="Stretch" Grid.Row="7" VerticalAlignment="Stretch" FontSize="23" BorderThickness="0" Click="okChangeButton_Click"  FontWeight="Bold" Grid.ColumnSpan="2"/>
+                    <Button x:Name="backChangeButton" Content="Назад" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontSize="23" Grid.Row="7" Grid.Column="0" Foreground="#FFED1C24" BorderThickness="0" Click ="backChangeButton_Click"  FontWeight="Bold"/>
+                    <Label x:Name="changePasswordLabel" Content="Изменить пароль" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.ColumnSpan="6" FontSize="23" FontWeight="Bold" HorizontalContentAlignment="Center"/>
+                    <Label x:Name="oldPasswordLabel" Content="Старый пароль:" HorizontalAlignment="Stretch" Grid.Row="2" VerticalAlignment="Stretch"  Grid.ColumnSpan="2" FontSize="23"/>
+                    <Label x:Name="changedPasswordLabel" Content="Новый пароль:" HorizontalAlignment="Stretch" Grid.Row="3" VerticalAlignment="Stretch" Grid.ColumnSpan="2" FontSize="23"/>
+                    <Label x:Name="confirmChangePasswordLabel" Content="Подтвер. пароля:" HorizontalAlignment="Stretch" Grid.Row="4" VerticalAlignment="Stretch" Grid.ColumnSpan="2" FontSize="23"/>
+                    <PasswordBox x:Name="oldPasswordBox" Grid.ColumnSpan="3" Grid.Column="2" HorizontalAlignment="Stretch"  Grid.Row="2"  VerticalAlignment="Stretch" FontSize="23"/>
+                    <PasswordBox x:Name="changedPasswordBox" Grid.ColumnSpan="3" Grid.Column="2" HorizontalAlignment="Stretch"  Grid.Row="3"  VerticalAlignment="Stretch" FontSize="23"/>
+                    <PasswordBox x:Name="confirmChangePasswordBox" Grid.ColumnSpan="3" Grid.Column="2" HorizontalAlignment="Stretch"  Grid.Row="4" VerticalAlignment="Stretch" FontSize="23"/>
+
+                </Grid>
+            </Border>
         </Grid>
         <Border x:Name="errorBorder" BorderBrush="#FF13A6EA" BorderThickness="3" Grid.Column="1" Grid.Row="1" Visibility="Hidden">
             <Grid x:Name="errorGrid" Grid.Column="1" HorizontalAlignment="Stretch" Grid.Row="1" Grid.RowSpan="5" VerticalAlignment="Stretch" Background="White" >

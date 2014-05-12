@@ -84,5 +84,10 @@ namespace ClientLibrary
         {
             return client.service.Stat(login,course1,course2);
         }
+
+        public bool AnotherPassword(string login, string oldPassword, string newPassword)
+        {
+            return client.service.ChangePassword(login, oldPassword, newPassword);
+        }
     }
 }

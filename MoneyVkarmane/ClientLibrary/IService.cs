@@ -54,5 +54,9 @@ namespace ClientLibrary
         [XmlSerializerFormat]
         [WebGet(RequestFormat = WebMessageFormat.Xml, ResponseFormat = WebMessageFormat.Xml, BodyStyle = WebMessageBodyStyle.Wrapped)]
         List<Statistics> Stat(string login, double course1, double course2);
+
+        [OperationContract]
+        [WebInvoke(BodyStyle = WebMessageBodyStyle.Wrapped)]
+        bool ChangePassword(string login, string oldPassword, string newPassword);
     }
 }
